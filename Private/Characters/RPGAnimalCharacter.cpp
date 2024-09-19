@@ -1,7 +1,7 @@
 // Copyright Stanislav Bezrukov. All Rights Reserved.
 
 
-#include "RPGAnimalCharacter.h"
+#include "Characters/RPGAnimalCharacter.h"
 #include "Components/BoxComponent.h"
 
 ARPGAnimalCharacter::ARPGAnimalCharacter() : Super()
