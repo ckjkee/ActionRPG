@@ -17,6 +17,8 @@ class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
 public:
     ARPGPlayerCharacter();
 
+    virtual void Tick(float DeltaSeconds) override;
+
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 protected:

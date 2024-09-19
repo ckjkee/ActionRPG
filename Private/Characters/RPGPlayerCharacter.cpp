@@ -16,6 +16,19 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     CameraComponent->SetupAttachment(SpringArmComponent);
 }
 
+void ARPGPlayerCharacter::Tick(float DeltaSeconds)
+{
+    Super::Tick(DeltaSeconds);
+    if (this->GetVelocity().Size() == 0.f)
+    {
+        this->bUseControllerRotationYaw = false;
+    }
+    else
+    {
+        this->bUseControllerRotationYaw = true;
+    }
+}
+
 void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
     check(PlayerInputComponent);
