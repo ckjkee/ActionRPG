@@ -11,7 +11,7 @@
  *
  */
 UCLASS(Abstract)
-class ACTIONRPG_API URPGPawnAnimInstance : public UAnimInstance
+class ACTIONRPG_API URPGPawnAnimInstance final : public UAnimInstance
 {
     GENERATED_BODY()
 
