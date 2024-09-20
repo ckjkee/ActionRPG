@@ -1,10 +1,22 @@
 // Copyright Stanislav Bezrukov. All Rights Reserved.
 
 #include "Components/RPGHealthComponent.h"
+#include "Interfaces/RPGAttributes.h"
 
 void URPGHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
+    SetCurrentHealth(MaxHealth);
+    if (Attributes)
+    {
+        Attributes->OnAttributesChanged().AddUObject(this, &ThisClass::UpdateHealth);
+    }
+    OnHealthChanged.Broadcast(CurrentHealth);
+}
+
+void URPGHealthComponent::UpdateHealth(const float NewHealth)
+{
+    MaxHealth = NewHealth;
     SetCurrentHealth(MaxHealth);
     OnHealthChanged.Broadcast(CurrentHealth);
 }
@@ -59,6 +71,11 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
         bIsDead = true;
         OnDead.Broadcast();
     }
+}
+
+void URPGHealthComponent::SetAttributes(IRPGAttributes* InAttributes)
+{
+    Attributes = InAttributes;
 }
 
 // Take Damage Function

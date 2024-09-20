@@ -37,4 +37,6 @@ private:
 
     int32 LevelTreshold = 1000;
     int32 PrevThreshold = 0;
+
+    bool bHasDied = false;
 };

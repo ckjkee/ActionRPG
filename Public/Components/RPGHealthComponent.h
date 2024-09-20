@@ -9,6 +9,8 @@
 DECLARE_MULTICAST_DELEGATE(FOnDead)
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float)
 
+class IRPGAttributes;
+
 UCLASS()
 class ACTIONRPG_API URPGHealthComponent final : public URPGBaseComponent
 {
@@ -25,8 +27,11 @@ public:
     void AddHealth(const float Value);
     void ReduceHealth(const float Value);
     void SetCurrentHealth(const float InCurrentHealth);
+    void SetAttributes(IRPGAttributes* InAttributes);
 
 private:
+    IRPGAttributes* Attributes;
+
     bool bIsDead = false;
 
     UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
@@ -49,5 +54,7 @@ private:
     void StartRecovery();
 
     void DelayBeforeRecovery();
+
+    void UpdateHealth(const float NewHealth);
 
 };

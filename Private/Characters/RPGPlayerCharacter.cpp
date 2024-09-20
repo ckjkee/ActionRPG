@@ -5,6 +5,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/RPGExperienceComponent.h"
 #include "Components/RPGAttributesComponent.h"
+#include "Components/RPGHealthComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -18,6 +19,11 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     CameraComponent->SetupAttachment(SpringArmComponent);
 
     ExperienceComponent = CreateDefaultSubobject<URPGExperienceComponent>(TEXT("ExperienceComponent"));
+    check(ExperienceComponent);
+    check(AttributesComponent);
+    AttributesComponent->SetExperienceComponent(ExperienceComponent);
+    HealthComponent->SetAttributes(AttributesComponent);
+
 }
 
 void ARPGPlayerCharacter::Tick(float DeltaSeconds)
@@ -42,11 +48,6 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAxis("LookLR", this, &ThisClass::AddControllerYawInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ThisClass::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ThisClass::StopJumping);
-}
-
-inline URPGExperienceComponent* ARPGPlayerCharacter::GetExperienceComponent() const
-{
-    return ExperienceComponent;
 }
 
 void ARPGPlayerCharacter::MoveForwardBackward(const float Value)

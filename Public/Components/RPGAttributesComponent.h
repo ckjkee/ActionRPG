@@ -4,17 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
+#include "Interfaces/RPGAttributes.h"
 #include "RPGAttributesComponent.generated.h"
 
 class IRPGComponents;
 
 UCLASS()
-class ACTIONRPG_API URPGAttributesComponent final : public URPGBaseComponent
+class ACTIONRPG_API URPGAttributesComponent final : public URPGBaseComponent, public IRPGAttributes
 {
     GENERATED_BODY()
 public:
+    FOnAttributesChanged OnAttributesChangedEvent;
+
     virtual void BeginPlay() override;
     void SetNewAttributes(int16 CharacterLevel);
+    virtual void SetExperienceComponent(IRPGComponents* InComponent) override;
+    virtual FOnAttributesChanged& OnAttributesChanged() override;
 
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes", meta = (ClampMin = "0", UIMin = "0"))
@@ -29,5 +34,5 @@ private:
     float CurrentDamage = 0.f;
     float CurrentAttackSpeed = 0.f;
 
-    IRPGComponents* Component;
+    IRPGComponents* ExperienceComponent;
 };
