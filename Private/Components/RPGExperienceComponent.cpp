@@ -2,35 +2,43 @@
 
 #include "Components/RPGExperienceComponent.h"
 
-inline uint16 URPGExperienceComponent::GetCurrentLevel() const
+inline int16 URPGExperienceComponent::GetCurrentLevel() const
 {
     return PlayerLevel;
 }
 
-void URPGExperienceComponent::AddExperience(const uint32 Amount)
+void URPGExperienceComponent::AddExperience(const int32 Amount)
 {
     PlayerExperience += Amount;
     if (PlayerExperience >= LevelTreshold)
     {
         PlayerLevel += 1;
-        PlayerExperience -= LevelTreshold;
         OnReachNewLevel.Broadcast(PlayerLevel);
-        SetNewLevelTreshold();
-    } 
+        PlayerExperience -= LevelTreshold;
+        PrevThreshold = LevelTreshold;
+        SetNewTreshold(LevelTreshold, PlayerLevel);
+    }
 }
 
-void URPGExperienceComponent::SetNewLevelTreshold()
+void URPGExperienceComponent::SetNewTreshold(int32 Threshold, int16 level)
 {
-    uint16 N = 0;
-    for (uint16 i = 1; i <= PlayerLevel; ++i)
+    int16 N = 0;
+    for (int16 i = 1; i <= level; ++i)
     {
         N = N + i;
     }
-    LevelTreshold = 1000 * N;
+    Threshold = 1000 * N;
 }
 
-void URPGExperienceComponent::DecreaseExperience(const uint32 Amount)
+void URPGExperienceComponent::DecreaseExperience(const int32 Amount)
 {
+    PlayerExperience -= Amount;
+    if (PlayerExperience <= 0)
+    {
+        PlayerLevel -= 1;
+        OnReachNewLevel.Broadcast(PlayerLevel);
+        PlayerExperience += PrevThreshold;
+        LevelTreshold = PrevThreshold;
+        SetNewTreshold(PrevThreshold, PlayerLevel - 1);
+    }
 }
-
-

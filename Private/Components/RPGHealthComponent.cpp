@@ -6,8 +6,10 @@ void URPGHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
     CurrentHealth = MaxHealth;
+    OnHealthChanged.Broadcast(CurrentHealth);
 }
 
+//Delay before starting tick healing
 void URPGHealthComponent::DelayBeforeRecovery()
 {
     if (!DelayBeforeRecoveryTimer.IsValid())
@@ -16,6 +18,7 @@ void URPGHealthComponent::DelayBeforeRecovery()
     }
 }
 
+//Function for START healing per Tick
 void URPGHealthComponent::StartRecovery()
 {
     if (!RecoveryHealthTimer.IsValid())
@@ -24,9 +27,11 @@ void URPGHealthComponent::StartRecovery()
     }
 }
 
+//Healing Per Tick
 void URPGHealthComponent::RecoveryHealth()
 {
     SetCurrentHealth(CurrentHealth + HealthPerTick);
+    OnHealthChanged.Broadcast(CurrentHealth);
     if (FMath::IsNearlyEqual(CurrentHealth, MaxHealth))
     {
         GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
@@ -34,22 +39,14 @@ void URPGHealthComponent::RecoveryHealth()
     }
 }
 
+//Function for healing with items
 void URPGHealthComponent::AddHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth + Value);
+    OnHealthChanged.Broadcast(CurrentHealth);
 }
 
-void URPGHealthComponent::ReduceHealth(const float Value)
-{
-    SetCurrentHealth(CurrentHealth - Value);
-    if (DelayBeforeRecoveryTimer.IsValid())
-    {
-        GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
-        GetWorldTimerManager().ClearTimer(RecoveryHealthTimer);
-    }
-    DelayBeforeRecovery();
-}
-
+//Managing Health in all ways and broadcasting death
 void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
 {
     if (bIsDead)
@@ -63,3 +60,18 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
         OnDead.Broadcast();
     }
 }
+
+//Take Damage Function
+void URPGHealthComponent::ReduceHealth(const float Value)
+{
+    SetCurrentHealth(CurrentHealth - Value);
+    OnHealthChanged.Broadcast(CurrentHealth);
+    if (DelayBeforeRecoveryTimer.IsValid())
+    {
+        GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
+        GetWorldTimerManager().ClearTimer(RecoveryHealthTimer);
+    }
+    DelayBeforeRecovery();
+}
+
+
