@@ -6,18 +6,20 @@
 #include "Bases/RPGBaseComponent.h"
 #include "RPGExperienceComponent.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnNewLevel, int)
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnReachNewLevel, int)
 
-    UCLASS() class ACTIONRPG_API URPGExperienceComponent final : public URPGBaseComponent
+    UCLASS() 
+    class ACTIONRPG_API URPGExperienceComponent final : public URPGBaseComponent
 {
     GENERATED_BODY()
 public:
-
-    FOnNewLevel OnNewLevel;
+    FOnReachNewLevel OnReachNewLevel;
 
     uint16 inline GetCurrentLevel() const;
 
     void AddExperience(uint32 Amount);
+
+    void DecreaseExperience(uint32 Amount);
 
 private:
     void SetNewLevelTreshold();

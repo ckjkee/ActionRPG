@@ -7,16 +7,20 @@ inline uint16 URPGExperienceComponent::GetCurrentLevel() const
     return PlayerLevel;
 }
 
-void URPGExperienceComponent::AddExperience(uint32 Amount)
+void URPGExperienceComponent::AddExperience(const uint32 Amount)
 {
     PlayerExperience += Amount;
     if (PlayerExperience >= LevelTreshold)
     {
         PlayerLevel += 1;
         PlayerExperience -= LevelTreshold;
-        OnNewLevel.Broadcast(PlayerLevel);
+        OnReachNewLevel.Broadcast(PlayerLevel);
         SetNewLevelTreshold();
     }
+}
+
+void URPGExperienceComponent::DecreaseExperience(const uint32 Amount)
+{
 }
 
 void URPGExperienceComponent::SetNewLevelTreshold()
