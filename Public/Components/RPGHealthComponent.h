@@ -7,7 +7,7 @@
 #include "RPGHealthComponent.generated.h"
 
 DECLARE_MULTICAST_DELEGATE(FOnDead)
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, float)
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float)
 
 UCLASS()
 class ACTIONRPG_API URPGHealthComponent final : public URPGBaseComponent
@@ -17,7 +17,7 @@ class ACTIONRPG_API URPGHealthComponent final : public URPGBaseComponent
 public:
     FOnDead OnDead;
 
-    FOnDamageTaken OnDamageTaken;
+    FOnHealthChanged OnHealthChanged;
 
     virtual void BeginPlay() override;
     void RecoveryHealth();

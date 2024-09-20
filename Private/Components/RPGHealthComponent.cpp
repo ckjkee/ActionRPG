@@ -5,11 +5,11 @@
 void URPGHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
-    CurrentHealth = MaxHealth;
+    SetCurrentHealth(MaxHealth);
     OnHealthChanged.Broadcast(CurrentHealth);
 }
 
-//Delay before starting tick healing
+// Delay before starting tick healing
 void URPGHealthComponent::DelayBeforeRecovery()
 {
     if (!DelayBeforeRecoveryTimer.IsValid())
@@ -18,7 +18,7 @@ void URPGHealthComponent::DelayBeforeRecovery()
     }
 }
 
-//Function for START healing per Tick
+// Function for START healing per Tick
 void URPGHealthComponent::StartRecovery()
 {
     if (!RecoveryHealthTimer.IsValid())
@@ -27,7 +27,7 @@ void URPGHealthComponent::StartRecovery()
     }
 }
 
-//Healing Per Tick
+// Healing Per Tick
 void URPGHealthComponent::RecoveryHealth()
 {
     SetCurrentHealth(CurrentHealth + HealthPerTick);
@@ -39,14 +39,14 @@ void URPGHealthComponent::RecoveryHealth()
     }
 }
 
-//Function for healing with items
+// Function for healing with items
 void URPGHealthComponent::AddHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth + Value);
     OnHealthChanged.Broadcast(CurrentHealth);
 }
 
-//Managing Health in all ways and broadcasting death
+// Managing Health in all ways and broadcasting death
 void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
 {
     if (bIsDead)
@@ -61,7 +61,7 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
     }
 }
 
-//Take Damage Function
+// Take Damage Function
 void URPGHealthComponent::ReduceHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth - Value);
@@ -73,5 +73,3 @@ void URPGHealthComponent::ReduceHealth(const float Value)
     }
     DelayBeforeRecovery();
 }
-
-

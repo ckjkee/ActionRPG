@@ -4,6 +4,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/RPGExperienceComponent.h"
+#include "Components/RPGAttributesComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -41,6 +42,11 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAxis("LookLR", this, &ThisClass::AddControllerYawInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ThisClass::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ThisClass::StopJumping);
+}
+
+inline URPGExperienceComponent* ARPGPlayerCharacter::GetExperienceComponent() const
+{
+    return ExperienceComponent;
 }
 
 void ARPGPlayerCharacter::MoveForwardBackward(const float Value)

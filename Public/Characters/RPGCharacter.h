@@ -8,6 +8,7 @@
 #include "RPGCharacter.generated.h"
 
 class URPGHealthComponent;
+class URPGAttributesComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGCharacter : public ACharacter, public IMovementInterface
@@ -22,4 +23,6 @@ public:
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGHealthComponent* HealthComponent;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    URPGAttributesComponent* AttributesComponent;
 };

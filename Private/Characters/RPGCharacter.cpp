@@ -2,12 +2,16 @@
 
 #include "Characters/RPGCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Components/RPGAttributesComponent.h"
 #include "Components/RPGHealthComponent.h"
 
 ARPGCharacter::ARPGCharacter() : Super()
 {
     HealthComponent = CreateDefaultSubobject<URPGHealthComponent>(TEXT("HealthComponent"));
     check(HealthComponent);
+
+    AttributesComponent = CreateDefaultSubobject<URPGAttributesComponent>(TEXT("AttributesComponent"));
+    check(AttributesComponent);
 }
 
 bool ARPGCharacter::GetIsFalling() const

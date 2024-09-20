@@ -29,9 +29,8 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
     UCameraComponent* CameraComponent;
 
-    UPROPERTY(BlueprintReadOnly,EditDefaultsOnly,Category = "Components")
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGExperienceComponent* ExperienceComponent;
-
 
 private:
     void MoveForwardBackward(const float Value);
