@@ -6,5 +6,4 @@
 void ARPGHUD::BeginPlay()
 {
     Super::BeginPlay();
-    UE_LOG(LogTemp, Warning, TEXT("Im your HUD"));
 }

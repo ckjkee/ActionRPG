@@ -3,6 +3,7 @@
 #include "Characters/RPGPlayerCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/RPGExperienceComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -14,6 +15,8 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
     check(CameraComponent);
     CameraComponent->SetupAttachment(SpringArmComponent);
+
+    ExperienceComponent = CreateDefaultSubobject<URPGExperienceComponent>(TEXT("ExperienceComponent"));
 }
 
 void ARPGPlayerCharacter::Tick(float DeltaSeconds)

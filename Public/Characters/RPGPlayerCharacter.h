@@ -8,6 +8,7 @@
 
 class UCameraComponent;
 class USpringArmComponent;
+class URPGExperienceComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
@@ -27,6 +28,9 @@ protected:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
     UCameraComponent* CameraComponent;
+
+    UPROPERTY(BlueprintReadOnly,EditDefaultsOnly,Category = "Components")
+    URPGExperienceComponent* ExperienceComponent;
 
 private:
     void MoveForwardBackward(const float Value);
