@@ -7,11 +7,19 @@
 #include "Interfaces/MovementInterface.h"
 #include "RPGCharacter.generated.h"
 
+class URPGHealthComponent;
+
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGCharacter : public ACharacter, public IMovementInterface
 {
     GENERATED_BODY()
 
 public:
+    ARPGCharacter();
+
     virtual bool GetIsFalling() const override;
+
+protected:
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    URPGHealthComponent* HealthComponent;
 };

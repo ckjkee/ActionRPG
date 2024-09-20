@@ -16,11 +16,7 @@ void URPGExperienceComponent::AddExperience(const uint32 Amount)
         PlayerExperience -= LevelTreshold;
         OnReachNewLevel.Broadcast(PlayerLevel);
         SetNewLevelTreshold();
-    }
-}
-
-void URPGExperienceComponent::DecreaseExperience(const uint32 Amount)
-{
+    } 
 }
 
 void URPGExperienceComponent::SetNewLevelTreshold()
@@ -32,3 +28,9 @@ void URPGExperienceComponent::SetNewLevelTreshold()
     }
     LevelTreshold = 1000 * N;
 }
+
+void URPGExperienceComponent::DecreaseExperience(const uint32 Amount)
+{
+}
+
+

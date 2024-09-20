@@ -32,6 +32,7 @@ protected:
     UPROPERTY(BlueprintReadOnly,EditDefaultsOnly,Category = "Components")
     URPGExperienceComponent* ExperienceComponent;
 
+
 private:
     void MoveForwardBackward(const float Value);
     void MoveLeftRight(const float Value);

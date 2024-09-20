@@ -17,9 +17,9 @@ public:
 
     uint16 inline GetCurrentLevel() const;
 
-    void AddExperience(uint32 Amount);
+    void AddExperience(const uint32 Amount);
 
-    void DecreaseExperience(uint32 Amount);
+    void DecreaseExperience(const uint32 Amount);
 
 private:
     void SetNewLevelTreshold();
