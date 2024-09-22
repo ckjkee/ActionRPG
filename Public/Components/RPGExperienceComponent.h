@@ -14,6 +14,8 @@
     GENERATED_BODY()
 
 public:
+    virtual void BeginPlay() override;
+
     FOnReachNewLevel OnReachNewLevelEvent;
 
     int16 inline GetCurrentLevel() const;

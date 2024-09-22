@@ -6,6 +6,7 @@
 #include "Components/RPGExperienceComponent.h"
 #include "Components/RPGAttributesComponent.h"
 #include "Components/RPGHealthComponent.h"
+#include "Components/RPGInteractComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -19,11 +20,25 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     CameraComponent->SetupAttachment(SpringArmComponent);
 
     ExperienceComponent = CreateDefaultSubobject<URPGExperienceComponent>(TEXT("ExperienceComponent"));
+
     check(ExperienceComponent);
     check(AttributesComponent);
     AttributesComponent->SetExperienceComponent(ExperienceComponent);
+
+    check(HealthComponent);
     HealthComponent->SetAttributes(AttributesComponent);
 
+    InteractComponent = CreateDefaultSubobject<URPGInteractComponent>(TEXT("InteractComponent"));
+    check(InteractComponent);
+    InteractComponent->OnLeftEvent.AddUObject(this, &ThisClass::OnLeftInteractingActor);
+    InteractComponent->OnEnteredEvent.AddUObject(this, &ThisClass::OnEnteredInteractingActor);
+}
+
+void ARPGPlayerCharacter::BeginPlay()
+{
+    Super::BeginPlay();
+    check(InteractComponent);
+    InteractComponent->Start(CameraComponent);
 }
 
 void ARPGPlayerCharacter::Tick(float DeltaSeconds)
@@ -48,6 +63,22 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAxis("LookLR", this, &ThisClass::AddControllerYawInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ThisClass::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ThisClass::StopJumping);
+}
+
+void ARPGPlayerCharacter::OnLeftInteractingActor(AActor* InActor)
+{
+    if (InActor)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName());
+    }
+}
+
+void ARPGPlayerCharacter::OnEnteredInteractingActor(AActor* InActor)
+{
+    if (InActor)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName());
+    }
 }
 
 void ARPGPlayerCharacter::MoveForwardBackward(const float Value)

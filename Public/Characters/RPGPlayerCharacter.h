@@ -9,6 +9,7 @@
 class UCameraComponent;
 class USpringArmComponent;
 class URPGExperienceComponent;
+class URPGInteractComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
@@ -17,6 +18,8 @@ class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
 
 public:
     ARPGPlayerCharacter();
+
+    virtual void BeginPlay() override;
 
     virtual void Tick(float DeltaSeconds) override;
 
@@ -32,7 +35,12 @@ protected:
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGExperienceComponent* ExperienceComponent;
 
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
+    URPGInteractComponent* InteractComponent;
+
 private:
+    void OnLeftInteractingActor(AActor* InActor);
+    void OnEnteredInteractingActor(AActor* InActor);
     void MoveForwardBackward(const float Value);
     void MoveLeftRight(const float Value);
     void Move(const EAxis::Type& axis, const float Value);

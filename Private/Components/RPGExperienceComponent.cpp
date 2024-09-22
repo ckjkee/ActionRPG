@@ -2,6 +2,14 @@
 
 #include "Components/RPGExperienceComponent.h"
 
+void URPGExperienceComponent::BeginPlay()
+{
+    Super::BeginPlay();
+    OnReachNewLevelEvent.Broadcast(PlayerLevel);
+    SetNewTreshold(LevelTreshold,PlayerLevel);
+    SetNewTreshold(PrevThreshold, PlayerLevel - 1);
+}
+
 inline int16 URPGExperienceComponent::GetCurrentLevel() const
 {
     return PlayerLevel;
@@ -36,6 +44,7 @@ void URPGExperienceComponent::ManageExperience(const int32 Amount)
     if (PlayerExperience >= LevelTreshold)
     {
         PlayerLevel += 1;
+        UE_LOG(LogTemp, Warning, TEXT("Level =  %d"), PlayerLevel);
         OnReachNewLevelEvent.Broadcast(PlayerLevel);
         PlayerExperience -= LevelTreshold;
         PrevThreshold = LevelTreshold;
