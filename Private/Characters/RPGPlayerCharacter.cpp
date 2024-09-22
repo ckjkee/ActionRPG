@@ -7,6 +7,7 @@
 #include "Components/RPGAttributesComponent.h"
 #include "Components/RPGHealthComponent.h"
 #include "Components/RPGInteractComponent.h"
+#include "Components/RPGResurrectComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -32,6 +33,10 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     check(InteractComponent);
     InteractComponent->OnLeftEvent.AddUObject(this, &ThisClass::OnLeftInteractingActor);
     InteractComponent->OnEnteredEvent.AddUObject(this, &ThisClass::OnEnteredInteractingActor);
+
+    ResurrectComponent = CreateDefaultSubobject<URPGResurrectComponent>(TEXT("ResurrectionComponent"));
+    check(ResurrectComponent);
+    ResurrectComponent->SetHealthComponent(HealthComponent);
 }
 
 void ARPGPlayerCharacter::BeginPlay()

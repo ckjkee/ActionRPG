@@ -10,6 +10,7 @@ class UCameraComponent;
 class USpringArmComponent;
 class URPGExperienceComponent;
 class URPGInteractComponent;
+class URPGResurrectComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
@@ -37,6 +38,9 @@ protected:
 
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGInteractComponent* InteractComponent;
+
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
+    URPGResurrectComponent* ResurrectComponent;
 
 private:
     void OnLeftInteractingActor(AActor* InActor);

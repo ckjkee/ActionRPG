@@ -7,9 +7,8 @@
 #include "Interfaces/RPGComponents.h"
 #include "RPGExperienceComponent.generated.h"
 
-
-    UCLASS()  
-    class ACTIONRPG_API URPGExperienceComponent final : public URPGBaseComponent, public IRPGComponents
+UCLASS()
+class ACTIONRPG_API URPGExperienceComponent final : public URPGBaseComponent, public IRPGComponents
 {
     GENERATED_BODY()
 
@@ -24,7 +23,7 @@ public:
 
     void DecreaseExperience(const int32 Amount);
 
-     virtual inline FOnReachNewLevel& OnReachNewLevel() override;
+    virtual inline FOnReachNewLevel& OnReachNewLevel() override;
 
 private:
     void SetNewTreshold(int32& Threshold, int16 level);

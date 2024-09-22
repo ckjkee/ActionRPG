@@ -3,6 +3,7 @@
 #include "Components/RPGHealthComponent.h"
 #include "Interfaces/RPGAttributes.h"
 
+
 void URPGHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
@@ -11,14 +12,14 @@ void URPGHealthComponent::BeginPlay()
     {
         Attributes->OnAttributesChanged().AddUObject(this, &ThisClass::UpdateHealth);
     }
-    OnHealthChanged.Broadcast(CurrentHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
 }
 
 void URPGHealthComponent::UpdateHealth(const float NewHealth)
 {
     MaxHealth = NewHealth;
     SetCurrentHealth(MaxHealth);
-    OnHealthChanged.Broadcast(CurrentHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
 }
 
 // Delay before starting tick healing
@@ -43,7 +44,7 @@ void URPGHealthComponent::StartRecovery()
 void URPGHealthComponent::RecoveryHealth()
 {
     SetCurrentHealth(CurrentHealth + HealthPerTick);
-    OnHealthChanged.Broadcast(CurrentHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
     if (FMath::IsNearlyEqual(CurrentHealth, MaxHealth))
     {
         GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
@@ -55,7 +56,7 @@ void URPGHealthComponent::RecoveryHealth()
 void URPGHealthComponent::AddHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth + Value);
-    OnHealthChanged.Broadcast(CurrentHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
 }
 
 // Managing Health in all ways and broadcasting death
@@ -69,7 +70,7 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
     if (FMath::IsNearlyZero(CurrentHealth))
     {
         bIsDead = true;
-        OnDead.Broadcast();
+        OnDeadEvent.Broadcast();
     }
 }
 
@@ -82,11 +83,16 @@ void URPGHealthComponent::SetAttributes(IRPGAttributes* InAttributes)
 void URPGHealthComponent::ReduceHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth - Value);
-    OnHealthChanged.Broadcast(CurrentHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
     if (DelayBeforeRecoveryTimer.IsValid())
     {
         GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
         GetWorldTimerManager().ClearTimer(RecoveryHealthTimer);
     }
     DelayBeforeRecovery();
+}
+
+inline FOnDead& URPGHealthComponent::OnDead()
+{
+    return OnDeadEvent;
 }

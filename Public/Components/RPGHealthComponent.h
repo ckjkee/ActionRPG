@@ -4,22 +4,22 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
+#include "Interfaces/RPGHealth.h"
 #include "RPGHealthComponent.generated.h"
-
-DECLARE_MULTICAST_DELEGATE(FOnDead)
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float)
 
 class IRPGAttributes;
 
 UCLASS()
-class ACTIONRPG_API URPGHealthComponent final : public URPGBaseComponent
+class ACTIONRPG_API URPGHealthComponent final : public URPGBaseComponent, public IRPGHealth
 {
     GENERATED_BODY()
 
 public:
-    FOnDead OnDead;
+    FOnDead OnDeadEvent;
 
-    FOnHealthChanged OnHealthChanged;
+    FOnHealthChanged OnHealthChangedEvent;
+
+    virtual inline FOnDead& OnDead() override;
 
     virtual void BeginPlay() override;
     void RecoveryHealth();
@@ -50,11 +50,10 @@ private:
 
     UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
     float DelayValue = 10.f;
-   
+
     void StartRecovery();
 
     void DelayBeforeRecovery();
 
     void UpdateHealth(const float NewHealth);
-
 };

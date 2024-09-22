@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
+#include "Components/RPGHealthComponent.h"
 #include "Interfaces/RPGAttributes.h"
 #include "RPGAttributesComponent.generated.h"
 
@@ -35,4 +36,5 @@ private:
     float CurrentAttackSpeed = 0.f;
 
     IRPGComponents* ExperienceComponent;
+    
 };
