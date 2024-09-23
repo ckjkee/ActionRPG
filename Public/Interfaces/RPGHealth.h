@@ -25,5 +25,5 @@ class ACTIONRPG_API IRPGHealth
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
 public:
-    virtual inline FOnDead& OnDead() = 0;
+    virtual  FOnDead& OnDead() = 0;
 };

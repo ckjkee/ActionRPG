@@ -19,7 +19,7 @@ public:
 
     FOnHealthChanged OnHealthChangedEvent;
 
-    virtual inline FOnDead& OnDead() override;
+    virtual  FOnDead& OnDead() override;
 
     virtual void BeginPlay() override;
     void RecoveryHealth();
@@ -27,7 +27,6 @@ public:
     void AddHealth(const float Value);
     void ReduceHealth(const float Value);
     void SetCurrentHealth(const float InCurrentHealth);
-    void SetAttributes(IRPGAttributes* InAttributes);
 
 private:
     IRPGAttributes* Attributes;

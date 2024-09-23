@@ -15,8 +15,6 @@ class ACTIONRPG_API URPGResurrectComponent final : public URPGBaseComponent
 public:
     virtual void BeginPlay() override;
 
-    void SetHealthComponent(IRPGHealth* InHealthComponent);
-
     UFUNCTION(BlueprintCallable)
     void StartResurrection();
 

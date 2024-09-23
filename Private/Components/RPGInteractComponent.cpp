@@ -9,7 +9,7 @@ void URPGInteractComponent::Start(USceneComponent* InSceneComponent)
     GetWorldTimerManager().SetTimer(TimerHandle, this, &ThisClass::InteractTick, TimerTickRate, true);
 }
 
-inline AActor* URPGInteractComponent::GetInteractingActor() const
+ AActor* URPGInteractComponent::GetInteractingActor() const
 {
     return InteractingActor;
 }

@@ -9,6 +9,7 @@
 
 class URPGHealthComponent;
 class URPGAttributesComponent;
+class URPGExperienceComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGCharacter : public ACharacter, public IMovementInterface
@@ -25,4 +26,6 @@ protected:
     URPGHealthComponent* HealthComponent;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGAttributesComponent* AttributesComponent;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    URPGExperienceComponent* ExperienceComponent;
 };

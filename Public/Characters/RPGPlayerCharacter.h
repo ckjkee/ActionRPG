@@ -8,7 +8,6 @@
 
 class UCameraComponent;
 class USpringArmComponent;
-class URPGExperienceComponent;
 class URPGInteractComponent;
 class URPGResurrectComponent;
 
@@ -32,9 +31,6 @@ protected:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Components")
     UCameraComponent* CameraComponent;
-
-    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
-    URPGExperienceComponent* ExperienceComponent;
 
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGInteractComponent* InteractComponent;

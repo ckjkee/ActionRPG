@@ -6,21 +6,19 @@ void URPGExperienceComponent::BeginPlay()
 {
     Super::BeginPlay();
     OnReachNewLevelEvent.Broadcast(PlayerLevel);
-    SetNewTreshold(LevelTreshold,PlayerLevel);
+    SetNewTreshold(LevelTreshold, PlayerLevel);
     SetNewTreshold(PrevThreshold, PlayerLevel - 1);
 }
 
-inline int16 URPGExperienceComponent::GetCurrentLevel() const
+int16 URPGExperienceComponent::GetCurrentLevel() const
 {
     return PlayerLevel;
 }
 
-
-inline FOnReachNewLevel& URPGExperienceComponent::OnReachNewLevel()
+FOnReachNewLevel& URPGExperienceComponent::OnReachNewLevel()
 {
     return OnReachNewLevelEvent;
 }
-
 
 void URPGExperienceComponent::AddExperience(const int32 Amount)
 {
@@ -64,7 +62,3 @@ void URPGExperienceComponent::DecreaseExperience(const int32 Amount)
 {
     ManageExperience(-Amount);
 }
-
-
-
-

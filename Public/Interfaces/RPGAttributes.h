@@ -21,6 +21,5 @@ class ACTIONRPG_API IRPGAttributes
 {
 	GENERATED_BODY()
 public:
-    virtual void SetExperienceComponent(IRPGComponents* InComponent) = 0;
     virtual FOnAttributesChanged& OnAttributesChanged() = 0;
 };

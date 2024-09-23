@@ -20,7 +20,7 @@ public:
     FOnEntered OnEnteredEvent;
     FOnLeft OnLeftEvent;
     void Start(USceneComponent* InSceneComponent);
-    inline AActor* GetInteractingActor() const;
+     AActor* GetInteractingActor() const;
 
 private:
     FTimerHandle TimerHandle;

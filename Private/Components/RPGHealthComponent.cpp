@@ -2,12 +2,14 @@
 
 #include "Components/RPGHealthComponent.h"
 #include "Interfaces/RPGAttributes.h"
+#include "Utility/RPGHelperFunctions.h"
 
 
 void URPGHealthComponent::BeginPlay()
 {
     Super::BeginPlay();
     SetCurrentHealth(MaxHealth);
+    Attributes = RPGHelperFunctions::GetComponentByInterface<IRPGAttributes>(GetOwner());
     if (Attributes)
     {
         Attributes->OnAttributesChanged().AddUObject(this, &ThisClass::UpdateHealth);
@@ -74,11 +76,6 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
     }
 }
 
-void URPGHealthComponent::SetAttributes(IRPGAttributes* InAttributes)
-{
-    Attributes = InAttributes;
-}
-
 // Take Damage Function
 void URPGHealthComponent::ReduceHealth(const float Value)
 {
@@ -92,7 +89,7 @@ void URPGHealthComponent::ReduceHealth(const float Value)
     DelayBeforeRecovery();
 }
 
-inline FOnDead& URPGHealthComponent::OnDead()
+ FOnDead& URPGHealthComponent::OnDead()
 {
     return OnDeadEvent;
 }

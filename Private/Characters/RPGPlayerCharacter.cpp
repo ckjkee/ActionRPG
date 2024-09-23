@@ -20,23 +20,12 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     check(CameraComponent);
     CameraComponent->SetupAttachment(SpringArmComponent);
 
-    ExperienceComponent = CreateDefaultSubobject<URPGExperienceComponent>(TEXT("ExperienceComponent"));
-
-    check(ExperienceComponent);
-    check(AttributesComponent);
-    AttributesComponent->SetExperienceComponent(ExperienceComponent);
-
-    check(HealthComponent);
-    HealthComponent->SetAttributes(AttributesComponent);
-
     InteractComponent = CreateDefaultSubobject<URPGInteractComponent>(TEXT("InteractComponent"));
     check(InteractComponent);
     InteractComponent->OnLeftEvent.AddUObject(this, &ThisClass::OnLeftInteractingActor);
     InteractComponent->OnEnteredEvent.AddUObject(this, &ThisClass::OnEnteredInteractingActor);
 
     ResurrectComponent = CreateDefaultSubobject<URPGResurrectComponent>(TEXT("ResurrectionComponent"));
-    check(ResurrectComponent);
-    ResurrectComponent->SetHealthComponent(HealthComponent);
 }
 
 void ARPGPlayerCharacter::BeginPlay()

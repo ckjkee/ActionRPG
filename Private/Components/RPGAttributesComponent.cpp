@@ -1,12 +1,13 @@
 // Copyright Stanislav Bezrukov. All Rights Reserved.
 
 #include "Components/RPGAttributesComponent.h"
-#include "Components/RPGExperienceComponent.h"
+#include "Utility/RPGHelperFunctions.h"
 #include "Interfaces/RPGComponents.h"
 
 void URPGAttributesComponent::BeginPlay()
 {
     Super::BeginPlay();
+    ExperienceComponent = RPGHelperFunctions::GetComponentByInterface<IRPGComponents>(GetOwner());
     if (ExperienceComponent)
     {
         ExperienceComponent->OnReachNewLevel().AddUObject(this, &ThisClass::SetNewAttributes);
@@ -22,11 +23,6 @@ void URPGAttributesComponent::SetNewAttributes(int16 CharacterLevel)
     UE_LOG(LogTemp, Warning, TEXT("Health = %f"), CurrentHealth);
     UE_LOG(LogTemp, Warning, TEXT("Damage = %f"), CurrentDamage);
     UE_LOG(LogTemp, Warning, TEXT("AttackSpeed = %f"), CurrentAttackSpeed);
-}
-
-void URPGAttributesComponent::SetExperienceComponent(IRPGComponents* InComponent)
-{
-    ExperienceComponent = InComponent;
 }
 
 FOnAttributesChanged& URPGAttributesComponent::OnAttributesChanged()

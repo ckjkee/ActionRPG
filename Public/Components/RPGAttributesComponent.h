@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
-#include "Components/RPGHealthComponent.h"
 #include "Interfaces/RPGAttributes.h"
 #include "RPGAttributesComponent.generated.h"
 
@@ -19,7 +18,6 @@ public:
 
     virtual void BeginPlay() override;
     void SetNewAttributes(int16 CharacterLevel);
-    virtual void SetExperienceComponent(IRPGComponents* InComponent) override;
     virtual FOnAttributesChanged& OnAttributesChanged() override;
 
 protected:

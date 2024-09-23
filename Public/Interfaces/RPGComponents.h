@@ -19,5 +19,5 @@ class ACTIONRPG_API IRPGComponents
 	GENERATED_BODY()
 
 public:
-    virtual inline FOnReachNewLevel& OnReachNewLevel() = 0;
+    virtual  FOnReachNewLevel& OnReachNewLevel() = 0;
 };
