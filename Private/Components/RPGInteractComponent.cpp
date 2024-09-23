@@ -17,8 +17,11 @@ void URPGInteractComponent::Start(USceneComponent* InSceneComponent)
 void URPGInteractComponent::InteractTick()
 {
     check(SceneComponent);
+    FVector Location;
+    FRotator Rotation;
+    GetOwner()->GetInstigatorController()->GetPlayerViewPoint(Location, Rotation);
     const FVector StartLocation = SceneComponent->GetComponentLocation();
-    const FVector EndLocation = StartLocation + SceneComponent->GetForwardVector() * Distance;
+    const FVector EndLocation = StartLocation + Rotation.Vector() * Distance;
 
     FHitResult OutHit;
     UKismetSystemLibrary::SphereTraceSingle(this, StartLocation, EndLocation, Radius, TraceTypeQuery, false,

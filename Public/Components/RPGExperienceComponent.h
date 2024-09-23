@@ -31,10 +31,10 @@ private:
     void ManageExperience(const int32 Amount);
 
     UPROPERTY(EditDefaultsOnly, Category = "Level", meta = (ClampMin = "0"))
-    int32 PlayerExperience = 0;
+    int32 CharacterExperience = 0;
 
     UPROPERTY(EditAnywhere, Category = "Level", meta = (ClampMin = "1"))
-    int16 PlayerLevel = 1;
+    int16 CharacterLevel = 1;
 
     int32 LevelTreshold = 1000;
     int32 PrevThreshold = 0;

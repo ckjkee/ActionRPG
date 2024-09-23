@@ -7,6 +7,8 @@
 #include "Interfaces/RPGAttributes.h"
 #include "RPGAttributesComponent.generated.h"
 
+inline constexpr float LEVEL_AMPLIFIER = 1.1;
+
 class IRPGComponents;
 
 UCLASS()
@@ -17,7 +19,7 @@ public:
     FOnAttributesChanged OnAttributesChangedEvent;
 
     virtual void BeginPlay() override;
-    void SetNewAttributes(int16 CharacterLevel);
+    void SetNewAttributes(const int16 CharacterLevel);
     virtual FOnAttributesChanged& OnAttributesChanged() override;
 
 protected:

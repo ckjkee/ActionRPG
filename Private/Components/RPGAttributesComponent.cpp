@@ -14,12 +14,12 @@ void URPGAttributesComponent::BeginPlay()
     }
 }
 
-void URPGAttributesComponent::SetNewAttributes(int16 CharacterLevel)
+void URPGAttributesComponent::SetNewAttributes(const int16 CharacterLevel)
 {
-    CurrentHealth = BaseHealth * FMath::Pow(1.1, CharacterLevel);
+    CurrentHealth = BaseHealth * FMath::Pow(LEVEL_AMPLIFIER, CharacterLevel);
     OnAttributesChangedEvent.Broadcast(CurrentHealth);
-    CurrentDamage = BaseDamage * FMath::Pow(1.1, CharacterLevel);
-    CurrentAttackSpeed = BaseAttackSpeed * FMath::Pow(1.1, CharacterLevel);
+    CurrentDamage = BaseDamage * FMath::Pow(LEVEL_AMPLIFIER, CharacterLevel);
+    CurrentAttackSpeed = BaseAttackSpeed * FMath::Pow(LEVEL_AMPLIFIER, CharacterLevel);
     UE_LOG(LogTemp, Warning, TEXT("Health = %f"), CurrentHealth);
     UE_LOG(LogTemp, Warning, TEXT("Damage = %f"), CurrentDamage);
     UE_LOG(LogTemp, Warning, TEXT("AttackSpeed = %f"), CurrentAttackSpeed);

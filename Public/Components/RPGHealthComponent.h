@@ -19,12 +19,18 @@ public:
 
     FOnHealthChanged OnHealthChangedEvent;
 
+    FOnDamageTaken OnDamageTakenEvent;
+
     virtual  FOnDead& OnDead() override;
+    virtual FOnHealthChanged& OnHealthChanged() override;
+    virtual FOnDamageTaken& OnDamageTaken() override;
+    virtual void ResetCharacterForResurrect() override;
 
     virtual void BeginPlay() override;
     void RecoveryHealth();
 
     void AddHealth(const float Value);
+    UFUNCTION(BlueprintCallable) // TODO Delete
     void ReduceHealth(const float Value);
     void SetCurrentHealth(const float InCurrentHealth);
 
@@ -33,21 +39,20 @@ private:
 
     bool bIsDead = false;
 
-    UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
     float MaxHealth = 100.f;
 
     float CurrentHealth = 0.f;
 
-    UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
+    UPROPERTY(EditDefaultsOnly, Category = "HealthSettings", meta = (ClampMin = "0", UIMin = "0"))
     float HealthPerTick = 1.f;
 
     FTimerHandle RecoveryHealthTimer;
     FTimerHandle DelayBeforeRecoveryTimer;
 
-    UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
+    UPROPERTY(EditDefaultsOnly, Category = "HealthSettings", meta = (ClampMin = "0", UIMin = "0"))
     float RecoveryRate = 1.f;
 
-    UPROPERTY(EditDefaultsOnly, meta = (ClampMin = "0", UIMin = "0"))
+    UPROPERTY(EditDefaultsOnly, Category = "HealthSettings", meta = (ClampMin = "0", UIMin = "0"))
     float DelayValue = 10.f;
 
     void StartRecovery();

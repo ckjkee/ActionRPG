@@ -69,6 +69,7 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
         return;
     }
     CurrentHealth = FMath::Clamp(InCurrentHealth, 0, MaxHealth);
+    UE_LOG(LogTemp, Warning, TEXT("Current Health = %f"), CurrentHealth); // TODO DELETE
     if (FMath::IsNearlyZero(CurrentHealth))
     {
         bIsDead = true;
@@ -86,10 +87,27 @@ void URPGHealthComponent::ReduceHealth(const float Value)
         GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
         GetWorldTimerManager().ClearTimer(RecoveryHealthTimer);
     }
+    OnDamageTakenEvent.Broadcast();
     DelayBeforeRecovery();
 }
 
  FOnDead& URPGHealthComponent::OnDead()
 {
     return OnDeadEvent;
+}
+
+FOnHealthChanged& URPGHealthComponent::OnHealthChanged()
+{
+    return OnHealthChangedEvent;
+}
+
+FOnDamageTaken& URPGHealthComponent::OnDamageTaken()
+{
+    return OnDamageTakenEvent;
+}
+
+void URPGHealthComponent::ResetCharacterForResurrect()
+{
+    bIsDead = false;
+    SetCurrentHealth(MaxHealth);
 }

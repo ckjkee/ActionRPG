@@ -26,7 +26,7 @@ void URPGResurrectComponent::Resurrect()
 {
     check(PlayerToResurrect);
     PlayerToResurrect->SetActorLocation(ResurrectLocation);
+    HealthComponent->ResetCharacterForResurrect();
     GetWorldTimerManager().ClearTimer(ResurrectionTimer);
-    UE_LOG(LogTemp, Warning, TEXT("Player = %s"), *PlayerToResurrect->GetName());
 }
 

@@ -35,7 +35,7 @@ private:
     float Radius = 40.f;
 
     UPROPERTY(EditDefaultsOnly, Category = "Settings", meta = (ClampMin = "0", UIMin = "0", Units = "Centimeters"))
-    float Distance = 200.f;
+    float Distance = 100.f;
 
     UPROPERTY(EditDefaultsOnly, Category = "Settings")
     TEnumAsByte<ETraceTypeQuery> TraceTypeQuery;

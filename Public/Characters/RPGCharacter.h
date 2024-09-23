@@ -24,8 +24,10 @@ public:
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGHealthComponent* HealthComponent;
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGAttributesComponent* AttributesComponent;
+
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGExperienceComponent* ExperienceComponent;
 };

@@ -5,14 +5,14 @@
 void URPGExperienceComponent::BeginPlay()
 {
     Super::BeginPlay();
-    OnReachNewLevelEvent.Broadcast(PlayerLevel);
-    SetNewTreshold(LevelTreshold, PlayerLevel);
-    SetNewTreshold(PrevThreshold, PlayerLevel - 1);
+    OnReachNewLevelEvent.Broadcast(CharacterLevel);
+    SetNewTreshold(LevelTreshold, CharacterLevel);
+    SetNewTreshold(PrevThreshold, CharacterLevel - 1);
 }
 
 int16 URPGExperienceComponent::GetCurrentLevel() const
 {
-    return PlayerLevel;
+    return CharacterLevel;
 }
 
 FOnReachNewLevel& URPGExperienceComponent::OnReachNewLevel()
@@ -38,23 +38,23 @@ void URPGExperienceComponent::SetNewTreshold(int32& Threshold, int16 level)
 void URPGExperienceComponent::ManageExperience(const int32 Amount)
 {
 
-    PlayerExperience = PlayerExperience + Amount;
-    if (PlayerExperience >= LevelTreshold)
+    CharacterExperience = CharacterExperience + Amount;
+    if (CharacterExperience >= LevelTreshold)
     {
-        PlayerLevel += 1;
-        UE_LOG(LogTemp, Warning, TEXT("Level =  %d"), PlayerLevel);
-        OnReachNewLevelEvent.Broadcast(PlayerLevel);
-        PlayerExperience -= LevelTreshold;
+        CharacterLevel += 1;
+        UE_LOG(LogTemp, Warning, TEXT("Level =  %d"), CharacterLevel);
+        OnReachNewLevelEvent.Broadcast(CharacterLevel);
+        CharacterExperience -= LevelTreshold;
         PrevThreshold = LevelTreshold;
-        SetNewTreshold(LevelTreshold, PlayerLevel);
+        SetNewTreshold(LevelTreshold, CharacterLevel);
     }
-    if (PlayerExperience <= 0 && bHasDied)
+    if (CharacterExperience <= 0 && bHasDied)
     {
-        PlayerLevel -= 1;
-        OnReachNewLevelEvent.Broadcast(PlayerLevel);
-        PlayerExperience += PrevThreshold;
+        CharacterLevel -= 1;
+        OnReachNewLevelEvent.Broadcast(CharacterLevel);
+        CharacterExperience += PrevThreshold;
         LevelTreshold = PrevThreshold;
-        SetNewTreshold(PrevThreshold, PlayerLevel - 1);
+        SetNewTreshold(PrevThreshold, CharacterLevel - 1);
     }
 }
 

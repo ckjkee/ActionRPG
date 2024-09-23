@@ -8,6 +8,7 @@
 #include "Components/RPGHealthComponent.h"
 #include "Components/RPGInteractComponent.h"
 #include "Components/RPGResurrectComponent.h"
+#include "Components/RPGCameraShakeSourceComponent.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -26,13 +27,16 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
     InteractComponent->OnEnteredEvent.AddUObject(this, &ThisClass::OnEnteredInteractingActor);
 
     ResurrectComponent = CreateDefaultSubobject<URPGResurrectComponent>(TEXT("ResurrectionComponent"));
+
+    CameraShakeSourceComponent = CreateDefaultSubobject<URPGCameraShakeSourceComponent>(TEXT("CameraShakeSourceComponent"));
+    CameraShakeSourceComponent->SetupAttachment(GetRootComponent());
 }
 
 void ARPGPlayerCharacter::BeginPlay()
 {
     Super::BeginPlay();
     check(InteractComponent);
-    InteractComponent->Start(CameraComponent);
+    InteractComponent->Start(SpringArmComponent);
 }
 
 void ARPGPlayerCharacter::Tick(float DeltaSeconds)
@@ -57,13 +61,14 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAxis("LookLR", this, &ThisClass::AddControllerYawInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ThisClass::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ThisClass::StopJumping);
+    PlayerInputComponent->BindAxis("ZoomCamera", this, &ThisClass::ZoomCamera);
 }
 
 void ARPGPlayerCharacter::OnLeftInteractingActor(AActor* InActor)
 {
     if (InActor)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName());
+        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName()); // TODO DELETE
     }
 }
 
@@ -71,7 +76,7 @@ void ARPGPlayerCharacter::OnEnteredInteractingActor(AActor* InActor)
 {
     if (InActor)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName());
+        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName()); // TODO DELETE
     }
 }
 
@@ -95,4 +100,11 @@ void ARPGPlayerCharacter::Move(const EAxis::Type& axis, const float Value)
         const FVector Direction = FRotationMatrix(YawRotator).GetUnitAxis(axis);
         AddMovementInput(Direction, Value);
     }
+}
+
+void ARPGPlayerCharacter::ZoomCamera(const float Value)
+{
+    if (Value == 0.f || !Controller) return;
+    const float NewTargetArmLength = SpringArmComponent->TargetArmLength + Value * ZoomStep;
+    SpringArmComponent->TargetArmLength = FMath::Clamp(NewTargetArmLength, MinTargetArmLength, MaxTargetArmLength);
 }

@@ -21,7 +21,7 @@ void ARPGBorder::OnExternalBoxCollisionEndOverlap(UPrimitiveComponent* Overlappe
 {
     if (Player)
     {
-        Player->SetActorLocation(Location); 
+       Player->SetActorLocation(Location); 
     }
 }
 
