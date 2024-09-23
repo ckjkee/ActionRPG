@@ -24,4 +24,5 @@ private:
 
     UPROPERTY(EditDefaultsOnly, Category = "Camera | Shaking", meta = (ClampMin = "0", UIMin = "0", ClampMax = "1", UIMax = "1"))
     float Scale = 0.5f;
+
 };

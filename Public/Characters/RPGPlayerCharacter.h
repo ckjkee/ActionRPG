@@ -4,6 +4,7 @@
 
 #include "Characters/RPGCharacter.h"
 #include "CoreMinimal.h"
+#include "Interfaces/RPGPlayerInfo.h"
 #include "RPGPlayerCharacter.generated.h"
 
 class UCameraComponent;
@@ -13,7 +14,7 @@ class URPGResurrectComponent;
 class URPGCameraShakeSourceComponent;
 
 UCLASS(Abstract)
-class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter
+class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter, public IRPGPlayerInfo
 {
     GENERATED_BODY()
 

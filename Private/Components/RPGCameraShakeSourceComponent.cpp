@@ -12,12 +12,12 @@ void URPGCameraShakeSourceComponent::BeginPlay()
     HealthComponent->OnDamageTaken().AddUObject(this, &ThisClass::StartShaking);
 }
 
-void URPGCameraShakeSourceComponent::StartShaking() 
+void URPGCameraShakeSourceComponent::StartShaking()
 {
     StartCameraShake(CameraShake, Scale);
 }
 
-void URPGCameraShakeSourceComponent::StopShaking() 
+void URPGCameraShakeSourceComponent::StopShaking()
 {
     StopAllCameraShakes();
 }
