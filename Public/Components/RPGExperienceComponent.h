@@ -7,6 +7,8 @@
 #include "Interfaces/RPGComponents.h"
 #include "RPGExperienceComponent.generated.h"
 
+class IRPGHealth;
+
 UCLASS()
 class ACTIONRPG_API URPGExperienceComponent final : public URPGBaseComponent, public IRPGComponents
 {
@@ -18,26 +20,36 @@ public:
     FOnReachNewLevel OnReachNewLevelEvent;
 
     int16  GetCurrentLevel() const;
-    UFUNCTION(BlueprintCallable)
+
+    UFUNCTION(BlueprintCallable) // TODO DELETE
     void AddExperience(const int32 Amount);
 
+    UFUNCTION(BlueprintCallable) // TODO DELETE
     void DecreaseExperience(const int32 Amount);
 
     virtual  FOnReachNewLevel& OnReachNewLevel() override;
 
 private:
-    void SetNewTreshold(int32& Threshold, int16 level);
+    void SetNewTreshold(int32& Threshold, const uint16 level);
 
     void ManageExperience(const int32 Amount);
+
+    void OnDeadApplyPenalty();
 
     UPROPERTY(EditDefaultsOnly, Category = "Level", meta = (ClampMin = "0"))
     int32 CharacterExperience = 0;
 
     UPROPERTY(EditAnywhere, Category = "Level", meta = (ClampMin = "1"))
-    int16 CharacterLevel = 1;
+    uint16 CharacterLevel = 1;
+
+    UPROPERTY(EditAnywhere, Category = "Level", meta = (ClampMin = "1"))
+    float DeathExperiencePenalty = 400.f;
 
     int32 LevelTreshold = 1000;
     int32 PrevThreshold = 0;
 
     bool bHasDied = false;
+
+    IRPGHealth* HealthComponent;
+    
 };

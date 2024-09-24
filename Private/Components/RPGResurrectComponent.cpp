@@ -12,6 +12,11 @@ void URPGResurrectComponent::BeginPlay()
     HealthComponent->OnDead().AddUObject(this, &ThisClass::StartResurrection);
 }
 
+FOnRespawnPlayer& URPGResurrectComponent::OnRespawnPlayer()
+{    
+    return OnRespawnPlayerEvent;
+}
+
 void URPGResurrectComponent::StartResurrection()
 {
     PlayerToResurrect = GetOwner();
@@ -27,6 +32,7 @@ void URPGResurrectComponent::Resurrect()
     check(PlayerToResurrect);
     PlayerToResurrect->SetActorLocation(ResurrectLocation);
     HealthComponent->ResetCharacterForResurrect();
+    OnRespawnPlayerEvent.Broadcast();
     GetWorldTimerManager().ClearTimer(ResurrectionTimer);
 }
 

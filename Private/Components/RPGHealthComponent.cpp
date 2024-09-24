@@ -82,12 +82,12 @@ void URPGHealthComponent::ReduceHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth - Value);
     OnHealthChangedEvent.Broadcast(CurrentHealth);
+    OnDamageTakenEvent.Broadcast();
     if (DelayBeforeRecoveryTimer.IsValid())
     {
         GetWorldTimerManager().ClearTimer(DelayBeforeRecoveryTimer);
         GetWorldTimerManager().ClearTimer(RecoveryHealthTimer);
     }
-    OnDamageTakenEvent.Broadcast();
     DelayBeforeRecovery();
 }
 
@@ -110,4 +110,5 @@ void URPGHealthComponent::ResetCharacterForResurrect()
 {
     bIsDead = false;
     SetCurrentHealth(MaxHealth);
+    OnHealthChangedEvent.Broadcast(CurrentHealth);
 }

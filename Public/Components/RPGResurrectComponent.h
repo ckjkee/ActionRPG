@@ -4,21 +4,26 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
+#include "Interfaces/RPGRessurect.h"
 #include "RPGResurrectComponent.generated.h"
 
 class IRPGHealth;
 
 UCLASS()
-class ACTIONRPG_API URPGResurrectComponent final : public URPGBaseComponent
+class ACTIONRPG_API URPGResurrectComponent final : public URPGBaseComponent, public IRPGRessurect
 {
     GENERATED_BODY()
 public:
+    virtual FOnRespawnPlayer& OnRespawnPlayer() override;
+
     virtual void BeginPlay() override;
 
     UFUNCTION(BlueprintCallable)
     void StartResurrection();
 
     void Resurrect();
+
+    FOnRespawnPlayer OnRespawnPlayerEvent;
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Settings")
