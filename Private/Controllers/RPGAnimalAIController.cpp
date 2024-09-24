@@ -4,11 +4,16 @@
 #include "Interfaces/RPGPlayerInfo.h"
 #include "Perception/AISenseConfig_Sight.h"
 #include "Perception/AIPerceptionComponent.h"
+#include "Components/AI/RPGAIComponent.h"
+#include "Components/AI/RPGPatrolAIComponent.h"
+#include "Interfaces/RPGAnimalInfo.h"
+#include "Navigation/PathFollowingComponent.h"
 
 ARPGAnimalAIController::ARPGAnimalAIController() : Super()
 {
     AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
-    check(AIPerceptionComponent);
+
+    PatrolAIComponent = CreateDefaultSubobject<URPGPatrolAIComponent>(TEXT("PatrolAIComponent"));
 
     UAISenseConfig_Sight* SightSense = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightSense"));
     check(SightSense);
@@ -16,6 +21,7 @@ ARPGAnimalAIController::ARPGAnimalAIController() : Super()
     SightSense->SightRadius = 1000.f;
     SightSense->LoseSightRadius = 1200.f;
     SightSense->PeripheralVisionAngleDegrees = 180.f;
+    check(AIPerceptionComponent);
     AIPerceptionComponent->ConfigureSense(*SightSense);
     AIPerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &ThisClass::OnPerceptionUpdated);
 }
@@ -38,8 +44,17 @@ void ARPGAnimalAIController::TakeDamageFromActor(AActor* DamageInstigator)
     UE_LOG(LogTemp, Warning, TEXT("TakeDamageFromActor = %s"), *DamageInstigator->GetName()); // TODO DELETE
 }
 
+void ARPGAnimalAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
+{
+    Super::OnMoveCompleted(RequestID, Result);
+    check(CurrentAIComponent);
+    CurrentAIComponent->OnMoveCompleted(Result.IsSuccess());
+}
+
 void ARPGAnimalAIController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
-    UE_LOG(LogTemp, Warning, TEXT("OnPossess = %s"), *InPawn->GetName()); // TODO DELETE
+    check(PatrolAIComponent);
+    CurrentAIComponent = PatrolAIComponent;
+    CurrentAIComponent->Start(this);
 }

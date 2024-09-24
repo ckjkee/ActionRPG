@@ -21,6 +21,7 @@ public:
 
     virtual bool GetIsFalling() const override;
 
+
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGHealthComponent* HealthComponent;
