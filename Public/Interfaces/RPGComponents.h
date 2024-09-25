@@ -20,4 +20,5 @@ class ACTIONRPG_API IRPGComponents
 
 public:
     virtual  FOnReachNewLevel& OnReachNewLevel() = 0;
+	virtual uint16 GetCurrentLevel() = 0;
 };

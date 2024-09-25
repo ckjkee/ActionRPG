@@ -6,6 +6,7 @@
 #include "Perception/AIPerceptionComponent.h"
 #include "Components/AI/RPGAIComponent.h"
 #include "Components/AI/RPGPatrolAIComponent.h"
+#include "Components/AI/RPGAggressiveComponent.h"
 #include "Interfaces/RPGAnimalInfo.h"
 #include "Navigation/PathFollowingComponent.h"
 
@@ -14,6 +15,8 @@ ARPGAnimalAIController::ARPGAnimalAIController() : Super()
     AIPerceptionComponent = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("PerceptionComponent"));
 
     PatrolAIComponent = CreateDefaultSubobject<URPGPatrolAIComponent>(TEXT("PatrolAIComponent"));
+
+    AggressiveComponent = CreateDefaultSubobject<URPGAggressiveComponent>(TEXT("AgressiveComponent"));
 
     UAISenseConfig_Sight* SightSense = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightSense"));
     check(SightSense);
@@ -35,6 +38,7 @@ void ARPGAnimalAIController::DetectActor(AActor* InActor)
 {
     if (Cast<IRPGPlayerInfo>(InActor))
     {
+        AggressiveComponent->SetEnemy(InActor);
         UE_LOG(LogTemp, Warning, TEXT("DetectActor = %s"), *InActor->GetName()); // TODO Delete
     }
 }
@@ -54,7 +58,9 @@ void ARPGAnimalAIController::OnMoveCompleted(FAIRequestID RequestID, const FPath
 void ARPGAnimalAIController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
-    check(PatrolAIComponent);
-    CurrentAIComponent = PatrolAIComponent;
+    //check(PatrolAIComponent);
+    //CurrentAIComponent = PatrolAIComponent;
+    check(AggressiveComponent);
+    CurrentAIComponent = AggressiveComponent;
     CurrentAIComponent->Start(this);
 }

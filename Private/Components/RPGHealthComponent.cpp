@@ -69,7 +69,7 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
         return;
     }
     CurrentHealth = FMath::Clamp(InCurrentHealth, 0, MaxHealth);
-    UE_LOG(LogTemp, Warning, TEXT("Current Health = %f"), CurrentHealth); // TODO DELETE
+    UE_LOG(LogTemp, Warning, TEXT("SetCurrentHealth = %f"), CurrentHealth); // TODO DELETE
     if (FMath::IsNearlyZero(CurrentHealth))
     {
         bIsDead = true;

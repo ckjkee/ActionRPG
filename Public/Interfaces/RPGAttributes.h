@@ -8,6 +8,7 @@
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnAttributesChanged, float /*CurrentHealth*/)
 
+
 class IRPGComponents;
 
 UINTERFACE(MinimalAPI)
@@ -22,4 +23,6 @@ class ACTIONRPG_API IRPGAttributes
 	GENERATED_BODY()
 public:
     virtual FOnAttributesChanged& OnAttributesChanged() = 0;
+	virtual float GetAttackSpeed() const = 0;
+	virtual float GetCurrentDamage() const = 0;
 };

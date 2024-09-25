@@ -7,7 +7,7 @@
 void URPGExperienceComponent::BeginPlay()
 {
     Super::BeginPlay();
-    OnReachNewLevelEvent.Broadcast(CharacterLevel);
+    //OnReachNewLevelEvent.Broadcast(CharacterLevel);
     SetNewTreshold(LevelTreshold, CharacterLevel);
     SetNewTreshold(PrevThreshold, CharacterLevel - 1);
 
@@ -16,7 +16,7 @@ void URPGExperienceComponent::BeginPlay()
     HealthComponent->OnDead().AddUObject(this, &ThisClass::OnDeadApplyPenalty);
 }
 
-int16 URPGExperienceComponent::GetCurrentLevel() const
+uint16 URPGExperienceComponent::GetCurrentLevel()
 {
     return CharacterLevel;
 }

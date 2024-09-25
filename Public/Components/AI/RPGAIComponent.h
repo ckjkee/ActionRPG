@@ -8,6 +8,7 @@
 
 class AAIController;
 class IRPGAnimalInfo;
+class IRPGAttributes;
 
 UENUM(BlueprintType)
 enum class EMovementType : uint8
@@ -29,12 +30,15 @@ public:
 
 protected:
     void MoveToLocation(const FVector& Location) const;
-
-private:
-    UPROPERTY(EditDefaultsOnly)
-    TMap<EMovementType, float> Speeds{{EMovementType::Walking, 200}, {EMovementType::Running, 600}, {EMovementType::Sprinting, 900}};
+    void MoveToActor( AActor* InActor, float AcceptanceRadius) const;
 
     AAIController* AIController;
 
     IRPGAnimalInfo* Animal;
+
+    IRPGAttributes* AnimalAttributes;
+
+private:
+    UPROPERTY(EditDefaultsOnly)
+    TMap<EMovementType, float> Speeds{{EMovementType::Walking, 200}, {EMovementType::Running, 600}, {EMovementType::Sprinting, 900}};
 };

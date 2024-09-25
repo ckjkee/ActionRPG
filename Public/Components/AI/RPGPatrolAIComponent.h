@@ -14,7 +14,7 @@ class ACTIONRPG_API URPGPatrolAIComponent : public URPGAIComponent
 public:
 	virtual void Start(AAIController* InAIController) override;
 	virtual void OnMoveCompleted(const bool bIsSuccess) override;
-	virtual void Stop() override ;
+	virtual void Stop() override;
 private:
 	void MoveToNextPoint() const;
 	 FVector GetNextPointLocation() const;

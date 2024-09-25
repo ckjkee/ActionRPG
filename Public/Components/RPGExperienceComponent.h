@@ -19,7 +19,7 @@ public:
 
     FOnReachNewLevel OnReachNewLevelEvent;
 
-    int16  GetCurrentLevel() const;
+    virtual uint16 GetCurrentLevel() override;
 
     UFUNCTION(BlueprintCallable) // TODO DELETE
     void AddExperience(const int32 Amount);

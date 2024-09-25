@@ -16,11 +16,14 @@ class ACTIONRPG_API URPGAttributesComponent final : public URPGBaseComponent, pu
 {
     GENERATED_BODY()
 public:
+
     FOnAttributesChanged OnAttributesChangedEvent;
 
     virtual void BeginPlay() override;
     void SetNewAttributes(const int16 CharacterLevel);
     virtual FOnAttributesChanged& OnAttributesChanged() override;
+    virtual float GetAttackSpeed() const override;
+    virtual float GetCurrentDamage() const override;
 
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes", meta = (ClampMin = "0", UIMin = "0"))
@@ -31,10 +34,9 @@ protected:
     float BaseAttackSpeed = 0.5f;
 
 private:
-    float CurrentHealth = 0.f;
-    float CurrentDamage = 0.f;
-    float CurrentAttackSpeed = 0.f;
+    float CurrentHealth = BaseHealth;
+    float CurrentDamage = BaseDamage;
+    float CurrentAttackSpeed = BaseAttackSpeed;
 
     IRPGComponents* ExperienceComponent;
-    
 };

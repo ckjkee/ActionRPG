@@ -10,6 +10,7 @@
 class UAIPerceptionComponent;
 class URPGAIComponent;
 class URPGPatrolAIComponent;
+class URPGAggressiveComponent;
 struct FAIStimulus;
 
 UCLASS(Abstract)
@@ -36,6 +37,9 @@ private:
 
     UPROPERTY(VisibleAnywhere, Category = "Components")
     URPGPatrolAIComponent* PatrolAIComponent;
+
+    UPROPERTY(VisibleAnywhere, Category = "Components")
+    URPGAggressiveComponent* AggressiveComponent;
 
     UFUNCTION()
     void OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
