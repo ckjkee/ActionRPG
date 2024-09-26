@@ -39,13 +39,14 @@ void ARPGAnimalAIController::DetectActor(AActor* InActor)
     if (Cast<IRPGPlayerInfo>(InActor))
     {
         AggressiveComponent->SetEnemy(InActor);
-        UE_LOG(LogTemp, Warning, TEXT("DetectActor = %s"), *InActor->GetName()); // TODO Delete
+        ActivateComponent(AggressiveComponent);
     }
 }
 
 void ARPGAnimalAIController::TakeDamageFromActor(AActor* DamageInstigator)
 {
-    UE_LOG(LogTemp, Warning, TEXT("TakeDamageFromActor = %s"), *DamageInstigator->GetName()); // TODO DELETE
+    AggressiveComponent->SetEnemy(DamageInstigator);
+    ActivateComponent(AggressiveComponent);
 }
 
 void ARPGAnimalAIController::OnMoveCompleted(FAIRequestID RequestID, const FPathFollowingResult& Result)
@@ -58,9 +59,19 @@ void ARPGAnimalAIController::OnMoveCompleted(FAIRequestID RequestID, const FPath
 void ARPGAnimalAIController::OnPossess(APawn* InPawn)
 {
     Super::OnPossess(InPawn);
-    //check(PatrolAIComponent);
-    //CurrentAIComponent = PatrolAIComponent;
-    check(AggressiveComponent);
-    CurrentAIComponent = AggressiveComponent;
-    CurrentAIComponent->Start(this);
+    ActivateComponent(PatrolAIComponent);
+}
+
+void ARPGAnimalAIController::ActivateComponent(URPGAIComponent* InComponent)
+{
+    check(InComponent);
+    if (CurrentAIComponent != InComponent)
+    {
+        if (CurrentAIComponent)
+        {
+            CurrentAIComponent->Stop();
+        }
+        CurrentAIComponent = InComponent;
+        CurrentAIComponent->Start(this);
+    }
 }

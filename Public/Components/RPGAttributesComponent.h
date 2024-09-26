@@ -31,7 +31,7 @@ protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes", meta = (ClampMin = "0", UIMin = "0"))
     float BaseDamage = 20.f;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Attributes", meta = (ClampMin = "0", UIMin = "0"))
-    float BaseAttackSpeed = 0.5f;
+    float BaseAttackSpeed = 1.5f;
 
 private:
     float CurrentHealth = BaseHealth;

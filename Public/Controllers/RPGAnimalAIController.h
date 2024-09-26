@@ -43,4 +43,5 @@ private:
 
     UFUNCTION()
     void OnPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
+    void ActivateComponent(URPGAIComponent* InComponent);
 };

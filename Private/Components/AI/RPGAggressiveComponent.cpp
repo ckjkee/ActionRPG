@@ -8,7 +8,8 @@ void URPGAggressiveComponent::Start(AAIController* InAIController)
     Super::Start(InAIController);
     SetMovementType(EMovementType::Sprinting);
     DelayAttackSpeed = AnimalAttributes->GetAttackSpeed();
-    GetWorldTimerManager().SetTimer(TimerHandle, this, &ThisClass::MoveToTarget, DelayAttackSpeed, true, 0.f); // TODO: AttackSpeed Need to be reversed or reworked
+    UE_LOG(LogTemp, Warning, TEXT("AttackSpeed = %f"), DelayAttackSpeed);
+    GetWorldTimerManager().SetTimer(TimerHandle, this, &ThisClass::MoveToTarget, DelayAttackSpeed, 0.f); // TODO: AttackSpeed Need to be reversed or reworked
 }
 
 void URPGAggressiveComponent::OnMoveCompleted(const bool bIsSuccess)
@@ -17,6 +18,7 @@ void URPGAggressiveComponent::OnMoveCompleted(const bool bIsSuccess)
     if (bIsSuccess)
     {
         AttackTarget();
+        GetWorldTimerManager().SetTimer(TimerHandle, this, &ThisClass::MoveToTarget, DelayAttackSpeed, 0.f);
     }
 }
 

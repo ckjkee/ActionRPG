@@ -7,7 +7,7 @@
 void URPGExperienceComponent::BeginPlay()
 {
     Super::BeginPlay();
-    //OnReachNewLevelEvent.Broadcast(CharacterLevel);
+    OnReachNewLevelEvent.Broadcast(CharacterLevel);
     SetNewTreshold(LevelTreshold, CharacterLevel);
     SetNewTreshold(PrevThreshold, CharacterLevel - 1);
 

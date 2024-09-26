@@ -9,7 +9,6 @@ void URPGAttributesComponent::BeginPlay()
 {
     Super::BeginPlay();
     ExperienceComponent = RPGHelperFunctions::GetComponentByInterface<IRPGComponents>(GetOwner());
-    SetNewAttributes(ExperienceComponent->GetCurrentLevel()); // TODO DELETE
     if (ExperienceComponent)
     {
         ExperienceComponent->OnReachNewLevel().AddUObject(this, &ThisClass::SetNewAttributes);
