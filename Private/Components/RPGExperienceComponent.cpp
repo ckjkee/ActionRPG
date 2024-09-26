@@ -26,6 +26,12 @@ FOnReachNewLevel& URPGExperienceComponent::OnReachNewLevel()
     return OnReachNewLevelEvent;
 }
 
+void URPGExperienceComponent::SetLevel(uint16 InLevel)
+{
+    CharacterLevel = InLevel;
+    OnReachNewLevelEvent.Broadcast(CharacterLevel);
+}
+
 void URPGExperienceComponent::AddExperience(const int32 Amount)
 {
     ManageExperience(Amount);
@@ -49,11 +55,9 @@ void URPGExperienceComponent::ManageExperience(const int32 Amount)
         return;
     }
     CharacterExperience = CharacterExperience + Amount;
-    UE_LOG(LogTemp, Warning, TEXT("Experience = %d"), CharacterExperience); // TODO DELETE
     if (CharacterExperience >= LevelTreshold)
     {
         CharacterLevel += 1;
-        UE_LOG(LogTemp, Warning, TEXT("Level =  %d"), CharacterLevel); // TODO DELETE
         OnReachNewLevelEvent.Broadcast(CharacterLevel);
         CharacterExperience -= LevelTreshold;
         PrevThreshold = LevelTreshold;

@@ -2,6 +2,7 @@
 
 #include "Characters/RPGAnimalCharacter.h"
 #include "Components/BoxComponent.h"
+#include "Components/RPGExperienceComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -25,5 +26,10 @@ void ARPGAnimalCharacter::SetMovementSpeed(const float Value)
 {
     check(GetCharacterMovement());
     GetCharacterMovement()->MaxWalkSpeed = Value;
+}
+
+void ARPGAnimalCharacter::SetLevelForSpawn(uint16 InLevel)
+{
+    ExperienceComponent->SetLevel(InLevel);
 }
 

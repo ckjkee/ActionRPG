@@ -29,6 +29,8 @@ public:
 
     virtual  FOnReachNewLevel& OnReachNewLevel() override;
 
+    void SetLevel(uint16 InLevel);
+
 private:
     void SetNewTreshold(int32& Threshold, const uint16 level);
 

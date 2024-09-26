@@ -34,6 +34,12 @@ private:
     UPROPERTY(EditAnywhere, Category = "Spawn Settings")
     uint16 AmountToSpawn = 5;
 
+    UPROPERTY(EditAnywhere, Category = "Spawn Settings", meta = (ClampMin = "1", UIMin = "0"))
+    uint16 MinLevelToSpawn = 1;
+
+    UPROPERTY(EditAnywhere, Category = "Spawn Settings", meta = (ClampMin = "1", UIMin = "0"))
+    uint16 MaxLevelToSpawn = 3;
+
     TArray<AActor*> ActorsArray;
 
     void Spawn();

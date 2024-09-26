@@ -2,6 +2,7 @@
 
 #include "WorldActors/RPGAnimalSpawner.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Interfaces/RPGAnimalInfo.h"
 #include "Components/BoxComponent.h"
 
 ARPGAnimalSpawner::ARPGAnimalSpawner() : Super()
@@ -9,6 +10,7 @@ ARPGAnimalSpawner::ARPGAnimalSpawner() : Super()
     BoxComponent = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComponent"));
     check(BoxComponent);
     SetRootComponent(BoxComponent);
+    BoxComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void ARPGAnimalSpawner::BeginPlay()
@@ -25,6 +27,11 @@ void ARPGAnimalSpawner::Spawn()
 {
     check(GetWorld());
     AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(ActorToSpawn, GetSpawnLocation(), FRotator::ZeroRotator);
+    IRPGAnimalInfo* Animal = Cast<IRPGAnimalInfo>(SpawnedActor);
+    if(Animal)
+    {
+        Animal->SetLevelForSpawn(UKismetMathLibrary::RandomIntegerInRange(MinLevelToSpawn, MaxLevelToSpawn));
+    }
     if (SpawnedActor)
     {
         ActorsArray.Add(SpawnedActor);

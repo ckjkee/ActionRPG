@@ -18,6 +18,7 @@ public:
     ARPGAnimalCharacter();
 
     virtual void SetMovementSpeed(const float Value) override;
+    virtual void SetLevelForSpawn(uint16 InLevel) override;
 
 protected:
     UPROPERTY(VisibleAnywhere, Category = "Components")

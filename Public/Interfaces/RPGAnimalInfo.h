@@ -19,4 +19,5 @@ class ACTIONRPG_API IRPGAnimalInfo
 
 public:
 	virtual void SetMovementSpeed(const float Value) = 0;
+	virtual void SetLevelForSpawn(uint16 InLevel) = 0;
 };
