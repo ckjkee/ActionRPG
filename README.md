@@ -1,1 +1,1 @@
-Small game I am currently making to learn C++ UE5 Framework. Action RPG game which goal is to gain EXP from killing mobs, increasing level and upgrading through the merchant, excnahge loot for money and buy new items.
+Small game I am currently making to learn C++ UE5 Framework. Action RPG game which goal is to gain EXP from killing mobs, increasing level and upgrading through the merchant, exchange loot for money and buy new items.
