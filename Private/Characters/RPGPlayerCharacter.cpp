@@ -9,6 +9,7 @@
 #include "Components/RPGInteractComponent.h"
 #include "Components/RPGResurrectComponent.h"
 #include "Components/RPGCameraShakeSourceComponent.h"
+#include "Interfaces/RPGInteract.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 {
@@ -62,6 +63,7 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ThisClass::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ThisClass::StopJumping);
     PlayerInputComponent->BindAxis("ZoomCamera", this, &ThisClass::ZoomCamera);
+    PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &ThisClass::Interact);
 }
 
 void ARPGPlayerCharacter::OnLeftInteractingActor(AActor* InActor)
@@ -76,7 +78,7 @@ void ARPGPlayerCharacter::OnEnteredInteractingActor(AActor* InActor)
 {
     if (InActor)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName()); // TODO DELETE
+        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName()); // TODO DELETE
     }
 }
 
@@ -107,4 +109,14 @@ void ARPGPlayerCharacter::ZoomCamera(const float Value)
     if (Value == 0.f || !Controller) return;
     const float NewTargetArmLength = SpringArmComponent->TargetArmLength + Value * ZoomStep;
     SpringArmComponent->TargetArmLength = FMath::Clamp(NewTargetArmLength, MinTargetArmLength, MaxTargetArmLength);
+}
+
+void ARPGPlayerCharacter::Interact()
+{
+    check(InteractComponent);
+    IRPGInteract* InteractActor = Cast<IRPGInteract>(InteractComponent->GetInteractingActor());
+    if (InteractActor)
+    {
+        InteractActor->Interact(this);
+    }
 }

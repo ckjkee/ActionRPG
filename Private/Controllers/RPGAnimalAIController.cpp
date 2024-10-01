@@ -3,6 +3,7 @@
 #include "Controllers/RPGAnimalAIController.h"
 #include "Interfaces/RPGPlayerInfo.h"
 #include "Perception/AISenseConfig_Sight.h"
+#include "Perception/AISenseConfig_Hearing.h"
 #include "Perception/AIPerceptionComponent.h"
 #include "Components/AI/RPGAIComponent.h"
 #include "Components/AI/RPGPatrolAIComponent.h"
@@ -18,14 +19,15 @@ ARPGAnimalAIController::ARPGAnimalAIController() : Super()
 
     AggressiveComponent = CreateDefaultSubobject<URPGAggressiveComponent>(TEXT("AgressiveComponent"));
 
-    UAISenseConfig_Sight* SightSense = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightSense"));
+    UAISenseConfig_Sight* SightSense = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("SightConfig"));
     check(SightSense);
     SightSense->DetectionByAffiliation.bDetectNeutrals = true;
-    SightSense->SightRadius = 1000.f;
-    SightSense->LoseSightRadius = 1200.f;
+    SightSense->SightRadius = 2000.f;
+    SightSense->LoseSightRadius = 2500.f;
     SightSense->PeripheralVisionAngleDegrees = 180.f;
     check(AIPerceptionComponent);
     AIPerceptionComponent->ConfigureSense(*SightSense);
+
     AIPerceptionComponent->OnTargetPerceptionUpdated.AddDynamic(this, &ThisClass::OnPerceptionUpdated);
 }
 

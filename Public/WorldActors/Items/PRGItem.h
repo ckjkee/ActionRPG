@@ -15,6 +15,9 @@ class ACTIONRPG_API APRGItem : public ARPGInteractableObject
 	GENERATED_BODY()
 public:
 	virtual void OnConstruction(const FTransform& Transform) override;
+
+protected:
+    virtual void DoInteract(AActor* InActor) override;
 private:
     UPROPERTY(EditAnywhere, Category = "Settings")
 	FDataTableRowHandle ItemRow;

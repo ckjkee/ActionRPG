@@ -17,6 +17,8 @@ void URPGAIComponent::Start(AAIController* InAIController)
 
 void URPGAIComponent::Stop()
 {
+    check(AIController);
+    AIController->StopMovement();
 }
 
 void URPGAIComponent::OnMoveCompleted(const bool bIsSuccess)
@@ -52,5 +54,5 @@ void URPGAIComponent::MoveToLocation(const FVector& Location) const
 void URPGAIComponent::MoveToActor(AActor* InActor, float AcceptanceRadius) const
 {
     check(AIController);
-    AIController->MoveToActor(InActor,AcceptanceRadius );
+    AIController->MoveToActor(InActor, AcceptanceRadius);
 }

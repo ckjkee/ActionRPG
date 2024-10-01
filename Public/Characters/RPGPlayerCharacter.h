@@ -60,4 +60,5 @@ private:
     void MoveLeftRight(const float Value);
     void Move(const EAxis::Type& axis, const float Value);
     void ZoomCamera(const float Value);
+    void Interact();
 };
