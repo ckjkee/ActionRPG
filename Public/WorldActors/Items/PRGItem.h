@@ -6,19 +6,18 @@
 #include "WorldActors/Items/RPGInteractableObject.h"
 #include "PRGItem.generated.h"
 
-/**
- * 
- */
 UCLASS(Abstract)
 class ACTIONRPG_API APRGItem : public ARPGInteractableObject
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 public:
-	virtual void OnConstruction(const FTransform& Transform) override;
+    virtual void OnConstruction(const FTransform& Transform) override;
 
 protected:
     virtual void DoInteract(AActor* InActor) override;
+    virtual FText GetObjectName() const override;
+
 private:
     UPROPERTY(EditAnywhere, Category = "Settings")
-	FDataTableRowHandle ItemRow;
+    FDataTableRowHandle ItemRow;
 };

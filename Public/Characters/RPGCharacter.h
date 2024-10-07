@@ -11,6 +11,7 @@ class URPGHealthComponent;
 class URPGAttributesComponent;
 class URPGExperienceComponent;
 class URPGInventoryComponent;
+class URPGStartingItemsComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGCharacter : public ACharacter, public IMovementInterface
@@ -21,7 +22,6 @@ public:
     ARPGCharacter();
 
     virtual bool GetIsFalling() const override;
-
 
 protected:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
@@ -35,4 +35,7 @@ protected:
 
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
     URPGInventoryComponent* InventoryComponent;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+    URPGStartingItemsComponent* StartingItemsComponent;
 };

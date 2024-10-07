@@ -22,4 +22,6 @@ public:
         }
         return nullptr;
     }
+
+    static FText GetDisplayNameByActionName(const FName& ActionName);
 };

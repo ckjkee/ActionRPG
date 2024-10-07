@@ -8,6 +8,7 @@
 #include "RPGAnimalCharacter.generated.h"
 
 class UBoxComponent;
+class URPGInteractWidgetComponent;
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGAnimalCharacter final : public ARPGCharacter, public IRPGAnimalInfo
@@ -23,4 +24,7 @@ public:
 protected:
     UPROPERTY(VisibleAnywhere, Category = "Components")
     UBoxComponent* BlockingCollision;
+
+    UPROPERTY(VisibleAnywhere, Category = "Components")
+    URPGInteractWidgetComponent* InteractWidgetComponent;
 };

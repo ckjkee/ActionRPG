@@ -78,7 +78,7 @@ void ARPGPlayerCharacter::OnEnteredInteractingActor(AActor* InActor)
 {
     if (InActor)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName()); // TODO DELETE
+        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName()); // TODO DELETE
     }
 }
 

@@ -5,14 +5,11 @@
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Interfaces/RPGFocus.h"
 #include "RPGInteractComponent.generated.h"
 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnEntered, AActor*) 
-DECLARE_MULTICAST_DELEGATE_OneParam(FOnLeft, AActor*)
-
-
 UCLASS()
-class ACTIONRPG_API URPGInteractComponent : public URPGBaseComponent
+class ACTIONRPG_API URPGInteractComponent : public URPGBaseComponent, public IRPGFocus
 {
     GENERATED_BODY()
 
@@ -20,7 +17,10 @@ public:
     FOnEntered OnEnteredEvent;
     FOnLeft OnLeftEvent;
     void Start(USceneComponent* InSceneComponent);
-     AActor* GetInteractingActor() const;
+    AActor* GetInteractingActor() const;
+
+    virtual FOnEntered& OnEnter() override;
+    virtual FOnLeft& OnLeft() override;
 
 private:
     FTimerHandle TimerHandle;

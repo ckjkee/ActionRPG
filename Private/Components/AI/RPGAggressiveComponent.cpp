@@ -35,7 +35,7 @@ void URPGAggressiveComponent::SetEnemy(AActor* InEnemy)
 
 void URPGAggressiveComponent::AttackTarget()
 {
-    UE_LOG(LogTemp, Warning, TEXT("Damage Caused = %f"), AnimalAttributes->GetCurrentDamage()); // TODO DELETE
+   // UE_LOG(LogTemp, Warning, TEXT("Damage Caused = %f"), AnimalAttributes->GetCurrentDamage()); // TODO DELETE
 }
 
 void URPGAggressiveComponent::MoveToTarget()

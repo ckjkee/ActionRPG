@@ -75,6 +75,16 @@ void URPGHealthComponent::SetCurrentHealth(const float InCurrentHealth)
     }
 }
 
+float URPGHealthComponent::GetMaxHealth() const
+{
+    return MaxHealth;
+}
+
+float URPGHealthComponent::GetCurrentHealth() const
+{
+    return CurrentHealth;
+}
+
 // Take Damage Function
 void URPGHealthComponent::ReduceHealth(const float Value)
 {

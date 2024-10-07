@@ -7,6 +7,8 @@
 #include "Interfaces/RPGInteract.h"
 #include "RPGInteractableObject.generated.h"
 
+class URPGInteractWidgetComponent;
+
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGInteractableObject : public AActor, public IRPGInteract
 {
@@ -19,9 +21,15 @@ public:
 	virtual void OnLeave() override;
 
 protected:
+    virtual void BeginPlay() override;
+
     UPROPERTY(VisibleAnywhere, Category = "Components")
     UStaticMeshComponent* StaticMeshComponent;
 
+    UPROPERTY(VisibleAnywhere, Category = "Components")
+    URPGInteractWidgetComponent* InteractWidgetComponent;
+
     virtual bool CanInteract() const;
     virtual void DoInteract(AActor* InActor);
+    virtual FText GetObjectName() const;
 };

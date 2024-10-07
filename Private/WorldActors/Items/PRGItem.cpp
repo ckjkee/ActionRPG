@@ -23,3 +23,8 @@ void APRGItem::DoInteract(AActor* InActor)
 		Destroy();
     }
 }
+
+FText APRGItem::GetObjectName() const
+{
+    return FRPGItemHelper::GetItemName(ItemRow.RowName);
+}

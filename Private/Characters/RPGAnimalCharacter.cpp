@@ -3,6 +3,7 @@
 #include "Characters/RPGAnimalCharacter.h"
 #include "Components/BoxComponent.h"
 #include "Components/RPGExperienceComponent.h"
+#include "Components/RPGInteractWidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -20,6 +21,10 @@ ARPGAnimalCharacter::ARPGAnimalCharacter() : Super()
     check(BlockingCollision);
     BlockingCollision->SetupAttachment(GetRootComponent());
     BlockingCollision->SetCollisionProfileName("Pawn");
+
+    InteractWidgetComponent = CreateDefaultSubobject<URPGInteractWidgetComponent>(TEXT("InteractWidget"));
+    check(InteractWidgetComponent);
+    InteractWidgetComponent->SetupAttachment(GetMesh());
 }
 
 void ARPGAnimalCharacter::SetMovementSpeed(const float Value)

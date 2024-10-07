@@ -33,6 +33,8 @@ public:
     UFUNCTION(BlueprintCallable) // TODO Delete
     void ReduceHealth(const float Value);
     void SetCurrentHealth(const float InCurrentHealth);
+    virtual float GetMaxHealth() const override;
+    virtual float GetCurrentHealth() const override;
 
 private:
     IRPGAttributes* Attributes;

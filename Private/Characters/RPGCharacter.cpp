@@ -6,6 +6,7 @@
 #include "Components/RPGHealthComponent.h"
 #include "Components/RPGExperienceComponent.h"
 #include "Components/RPGInventoryComponent.h"
+#include "Components/RPGStartingItemsComponent.h"
 
 ARPGCharacter::ARPGCharacter() : Super()
 {
@@ -16,6 +17,8 @@ ARPGCharacter::ARPGCharacter() : Super()
     ExperienceComponent = CreateDefaultSubobject<URPGExperienceComponent>(TEXT("ExperienceComponent"));
 
     InventoryComponent = CreateDefaultSubobject<URPGInventoryComponent>(TEXT("InventoryComponent"));
+
+    StartingItemsComponent = CreateDefaultSubobject<URPGStartingItemsComponent>(TEXT("StartingItems")); 
 }
 
 bool ARPGCharacter::GetIsFalling() const

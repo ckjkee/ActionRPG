@@ -29,4 +29,6 @@ public:
     virtual FOnDead& OnDead() = 0;
     virtual FOnHealthChanged& OnHealthChanged() = 0;
     virtual void ResetCharacterForResurrect() = 0;
+    virtual float GetMaxHealth() const = 0;
+    virtual float GetCurrentHealth() const = 0;
 };
