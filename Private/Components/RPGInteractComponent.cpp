@@ -13,16 +13,6 @@ AActor* URPGInteractComponent::GetInteractingActor() const
     return InteractingActor;
 }
 
-FOnEntered& URPGInteractComponent::OnEnter()
-{
-    return OnEnteredEvent;
-}
-
-FOnLeft& URPGInteractComponent::OnLeft()
-{
-    return OnLeftEvent;
-}
-
 void URPGInteractComponent::InteractTick()
 {
     check(SceneComponent);

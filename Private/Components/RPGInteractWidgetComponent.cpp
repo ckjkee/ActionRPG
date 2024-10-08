@@ -13,21 +13,19 @@ URPGInteractWidgetComponent::URPGInteractWidgetComponent() : Super()
 void URPGInteractWidgetComponent::BeginPlay()
 {
     Super::BeginPlay();
-    UpdateWidget();
+    UpdateMyWidget();
 }
 
 void URPGInteractWidgetComponent::SetObjectName(const FText& InObjectName)
 {
     ObjectName = InObjectName;
-    UpdateWidget();
+    UpdateMyWidget();
 }
 
-void URPGInteractWidgetComponent::UpdateWidget()
+void URPGInteractWidgetComponent::UpdateMyWidget() const
 {
     IRPGWidgetInterface* InteractWidget = Cast<IRPGWidgetInterface>(GetWidget());
-    if (InteractWidget)
-    {
-        InteractWidget->SetInteractText(InteractText);
-        InteractWidget->SetObjectName(ObjectName);
-    }
+    check(InteractWidget);
+    InteractWidget->SetInteractText(InteractText);
+    InteractWidget->SetObjectName(ObjectName);
 }

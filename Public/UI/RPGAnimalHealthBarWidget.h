@@ -4,28 +4,20 @@
 
 #include "CoreMinimal.h"
 #include "UI/RPGBaseWidget.h"
+#include "Interfaces/RPGFocus.h"
 #include "RPGAnimalHealthBarWidget.generated.h"
 
-class IRPGHealth;
-class IRPGFocus;
 class UProgressBar;
 
 UCLASS(Abstract)
-class ACTIONRPG_API URPGAnimalHealthBarWidget final : public URPGBaseWidget
+class ACTIONRPG_API URPGAnimalHealthBarWidget final : public URPGBaseWidget, public IRPGFocus
 {
 	GENERATED_BODY()
 public:
-	void UpdateWidget(const float InHealth);
+	virtual void UpdateProgressBar(const float CurrentHealth, const float MaxHealth) override;
 protected:
 	virtual void NativePreConstruct() override;
 private:
     UPROPERTY(meta = (BindWidget))
 	UProgressBar* HealthBar;
-
-	IRPGHealth* HealthComponent;
-
-	IRPGFocus* InteractComponent;
-
-	void IsInFocus(AActor* Actor);
-	void IsOutOfFocus(AActor* Actor);
 };

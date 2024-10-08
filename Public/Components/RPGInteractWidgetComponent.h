@@ -22,5 +22,5 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Settings")
 	FText InteractText;
 
-	void UpdateWidget();
+	void UpdateMyWidget() const;
 };

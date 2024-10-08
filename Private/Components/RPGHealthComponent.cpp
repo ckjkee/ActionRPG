@@ -120,3 +120,8 @@ void URPGHealthComponent::ResetCharacterForResurrect()
     SetCurrentHealth(MaxHealth);
     OnHealthChangedEvent.Broadcast(CurrentHealth);
 }
+
+bool URPGHealthComponent::IsDead() const
+{
+    return bIsDead;
+}

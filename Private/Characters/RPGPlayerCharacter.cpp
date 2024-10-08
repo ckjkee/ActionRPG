@@ -68,17 +68,19 @@ void ARPGPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 
 void ARPGPlayerCharacter::OnLeftInteractingActor(AActor* InActor)
 {
-    if (InActor)
+    IRPGInteract* Interact = Cast<IRPGInteract>(InActor);
+    if (Interact)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnLeft = %s"), *InActor->GetName()); // TODO DELETE
+        Interact->OnLeave();
     }
 }
 
 void ARPGPlayerCharacter::OnEnteredInteractingActor(AActor* InActor)
 {
-    if (InActor)
+    IRPGInteract* Interact = Cast<IRPGInteract>(InActor);
+    if (Interact)
     {
-        UE_LOG(LogTemp, Warning, TEXT("OnEntered = %s"), *InActor->GetName()); // TODO DELETE
+        Interact->OnEnter();
     }
 }
 

@@ -16,8 +16,9 @@ class ACTIONRPG_API URPGButtonWidget final : public URPGBaseWidget
     GENERATED_BODY()
 public:
     FOnButtonClickedEvent& OnButtonClicked() const;
+
 protected:
-     virtual void NativePreConstruct() override;
+    virtual void NativePreConstruct() override;
 
     UPROPERTY(EditAnywhere, Category = "Settings")
     FText ButtonText;

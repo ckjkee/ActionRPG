@@ -25,6 +25,7 @@ public:
     virtual FOnHealthChanged& OnHealthChanged() override;
     virtual FOnDamageTaken& OnDamageTaken() override;
     virtual void ResetCharacterForResurrect() override;
+    bool IsDead() const;
 
     virtual void BeginPlay() override;
     void RecoveryHealth();

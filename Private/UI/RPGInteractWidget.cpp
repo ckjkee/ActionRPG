@@ -5,6 +5,15 @@
 #include "Components/TextBlock.h"
 #include "Utility/RPGHelperFunctions.h"
 
+void URPGInteractWidget::NativePreConstruct()
+{
+	Super::NativePreConstruct();
+	if(ActionNameTextBlock)
+    {
+		ActionNameTextBlock->SetText(RPGHelperFunctions::GetDisplayNameByActionName(ActionName));
+    }
+}
+
 void URPGInteractWidget::SetObjectName(const FText& ObjectName) const
 {
 	check(ObjectNameTextBlock);
@@ -17,11 +26,4 @@ void URPGInteractWidget::SetInteractText(const FText& InteractText) const
 	InteractTextBlock->SetText(InteractText);
 }
 
-void URPGInteractWidget::NativePreConstruct()
-{
-	Super::NativePreConstruct();
-	if(ActionNameTextBlock)
-    {
-		ActionNameTextBlock->SetText(RPGHelperFunctions::GetDisplayNameByActionName(ActionName));
-    }
-}
+

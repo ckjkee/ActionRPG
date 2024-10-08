@@ -4,19 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "UObject/Interface.h"
-#include "RPGFocus.generated.h"
+#include "RPGWidgetHealth.generated.h"
 
 UINTERFACE(MinimalAPI)
-class URPGFocus : public UInterface
+class URPGWidgetHealth : public UInterface
 {
 	GENERATED_BODY()
 };
 
-
-class ACTIONRPG_API IRPGFocus
+class ACTIONRPG_API IRPGWidgetHealth
 {
 	GENERATED_BODY()
 
 public:
-	virtual void UpdateProgressBar(const float CurrentHealth, const float MaxHealth) = 0;
 };
