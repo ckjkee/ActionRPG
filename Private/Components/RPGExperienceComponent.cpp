@@ -26,15 +26,31 @@ FOnReachNewLevel& URPGExperienceComponent::OnReachNewLevel()
     return OnReachNewLevelEvent;
 }
 
+FOnExperienceChange& URPGExperienceComponent::OnExperienceChange() 
+{
+    return OnExperienceChangeEvent;
+}
+
 void URPGExperienceComponent::SetLevel(uint16 InLevel)
 {
     CharacterLevel = InLevel;
     OnReachNewLevelEvent.Broadcast(CharacterLevel);
 }
 
+int32 URPGExperienceComponent::GetCurrentTreshold() const
+{
+    return LevelTreshold;
+}
+
+int32 URPGExperienceComponent::GetCurrentCharacterExperience() const
+{
+    return CharacterExperience;
+}
+
 void URPGExperienceComponent::AddExperience(const int32 Amount)
 {
     ManageExperience(Amount);
+    OnExperienceChangeEvent.Broadcast();
 }
 
 void URPGExperienceComponent::SetNewTreshold(int32& Threshold, const uint16 level)
@@ -92,4 +108,5 @@ void URPGExperienceComponent::OnDeadApplyPenalty()
 void URPGExperienceComponent::DecreaseExperience(const int32 Amount)
 {
     ManageExperience(-Amount);
+    OnExperienceChangeEvent.Broadcast();
 }

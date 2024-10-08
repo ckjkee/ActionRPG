@@ -19,6 +19,8 @@ public:
 
     FOnReachNewLevel OnReachNewLevelEvent;
 
+    FOnExperienceChange OnExperienceChangeEvent;
+
     virtual uint16 GetCurrentLevel() override;
 
     UFUNCTION(BlueprintCallable) // TODO DELETE
@@ -27,9 +29,15 @@ public:
     UFUNCTION(BlueprintCallable) // TODO DELETE
     void DecreaseExperience(const int32 Amount);
 
-    virtual  FOnReachNewLevel& OnReachNewLevel() override;
+    virtual FOnReachNewLevel& OnReachNewLevel() override;
+
+    virtual FOnExperienceChange& OnExperienceChange() override;
 
     void SetLevel(uint16 InLevel);
+
+    virtual int32 GetCurrentTreshold() const override;
+
+    virtual int32 GetCurrentCharacterExperience() const override;
 
 private:
     void SetNewTreshold(int32& Threshold, const uint16 level);
@@ -53,5 +61,4 @@ private:
     bool bHasDied = false;
 
     IRPGHealth* HealthComponent;
-    
 };
