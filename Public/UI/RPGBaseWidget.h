@@ -13,6 +13,7 @@ class ACTIONRPG_API URPGBaseWidget : public UUserWidget
 public:
     void Show();
     void Hide();
+    void Toggle();
 
 protected:
     UPROPERTY(Transient, meta = (BindWidgetAnimOptional))

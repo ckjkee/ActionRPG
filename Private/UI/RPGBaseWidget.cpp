@@ -30,6 +30,11 @@ void URPGBaseWidget::Hide()
     }
 }
 
+void URPGBaseWidget::Toggle()
+{
+    IsVisible() ? Hide() : Show();
+}
+
 void URPGBaseWidget::Update()
 {
 }
