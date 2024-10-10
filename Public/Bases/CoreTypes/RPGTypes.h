@@ -9,9 +9,9 @@
 UENUM(BlueprintType)
 enum class ERPGItemCategory : uint8
 {
-    Other = 0,
-    Weapon,
-    Utility
+    Other = 0       UMETA(DisplayName = "Other"), 
+    Weapon          UMETA(DisplayName = "Weapon"),
+    Utility         UMETA(DisplayName = "Utility")
 };
 
 USTRUCT(BlueprintType)

@@ -3,6 +3,7 @@
 #include "Components/RPGStartingItemsComponent.h"
 #include "Interfaces/RPGInventory.h"
 #include "Utility/RPGHelperFunctions.h"
+#include "Utility/RPGItemHelper.h"
 #include "Kismet/KismetMathLibrary.h"
 
 void URPGStartingItemsComponent::BeginPlay()
@@ -26,3 +27,4 @@ void URPGStartingItemsComponent::AddStartingItems()
         }
     }
 }
+

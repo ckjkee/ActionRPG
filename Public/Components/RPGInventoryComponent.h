@@ -21,6 +21,7 @@ public:
     virtual bool HasItem(const FName& ItemRowName) const override;
     virtual uint32 GetItemCount(const FName& ItemRowName) const override;
     virtual const TMap<FName, uint32>& GetItems() const override;
+    virtual const FName GetFirstWeapon() const override; 
 
 private:
     FOnInventroyChanged OnInventoryChangedEvent;

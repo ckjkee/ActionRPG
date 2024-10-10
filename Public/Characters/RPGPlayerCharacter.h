@@ -12,6 +12,8 @@ class USpringArmComponent;
 class URPGInteractComponent;
 class URPGResurrectComponent;
 class URPGCameraShakeSourceComponent;
+class URPGCurrentWeaponComponent;
+
 
 UCLASS(Abstract)
 class ACTIONRPG_API ARPGPlayerCharacter final : public ARPGCharacter, public IRPGPlayerInfo
@@ -39,9 +41,12 @@ protected:
 
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGResurrectComponent* ResurrectComponent;
-    
+
     UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
     URPGCameraShakeSourceComponent* CameraShakeSourceComponent;
+
+    UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Components")
+    URPGCurrentWeaponComponent* CurrentWeaponComponent;
 
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Camera | Zoom", meta = (ClampMin = "0", UIMin = "0"))
@@ -49,10 +54,9 @@ private:
 
     UPROPERTY(EditDefaultsOnly, Category = "Camera | Zoom", meta = (ClampMin = "0", UIMin = "0"))
     float MinTargetArmLength = 150.f;
-    
+
     UPROPERTY(EditDefaultsOnly, Category = "Camera | Zoom", meta = (ClampMin = "0", UIMin = "0"))
     float ZoomStep = 15.f;
-
 
     void OnLeftInteractingActor(AActor* InActor);
     void OnEnteredInteractingActor(AActor* InActor);

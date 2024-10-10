@@ -9,6 +9,8 @@
 #include "Components/RPGInteractComponent.h"
 #include "Components/RPGResurrectComponent.h"
 #include "Components/RPGCameraShakeSourceComponent.h"
+#include "Components/RPGStartingItemsComponent.h"
+#include "Components/RPGCurrentWeaponComponent.h"
 #include "Interfaces/RPGInteract.h"
 
 ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
@@ -31,6 +33,8 @@ ARPGPlayerCharacter::ARPGPlayerCharacter() : Super()
 
     CameraShakeSourceComponent = CreateDefaultSubobject<URPGCameraShakeSourceComponent>(TEXT("CameraShakeSourceComponent"));
     CameraShakeSourceComponent->SetupAttachment(GetRootComponent());
+
+    CurrentWeaponComponent = CreateDefaultSubobject<URPGCurrentWeaponComponent>(TEXT("CurrentWeaponComponent"));
 }
 
 void ARPGPlayerCharacter::BeginPlay()

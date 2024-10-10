@@ -26,4 +26,5 @@ public:
 	virtual bool HasItem(const FName& ItemRowName) const = 0;
 	virtual uint32 GetItemCount(const FName& ItemRowName) const = 0;
 	virtual const TMap<FName, uint32>& GetItems() const = 0;
+	virtual const FName GetFirstWeapon() const = 0; 
 };

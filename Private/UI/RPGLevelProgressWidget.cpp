@@ -23,10 +23,8 @@ void URPGLevelProgressWidget::UpdateExperienceBarAndText()
 
 void URPGLevelProgressWidget::SetWidgetProperties()
 {
-    //ExpComponent->GetCurrentCharacterExperience() / ExpComponent->GetCurrentTreshold()
     check(CurrentExperienceBar);
     CurrentExperienceBar->SetPercent(float(ExpComponent->GetCurrentCharacterExperience()) / float(ExpComponent->GetCurrentTreshold()));
-    UE_LOG(LogTemp, Warning, TEXT("Percent = %f"), CurrentExperienceBar->GetPercent())
 
     check(CurrentExperienceTextBlock);
     CurrentExperienceTextBlock->SetText(MakeFormatText());

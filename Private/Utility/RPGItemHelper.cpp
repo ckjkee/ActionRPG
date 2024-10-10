@@ -31,3 +31,9 @@ UStaticMesh* FRPGItemHelper::GetItemStaticMesh(const FName& InRowName)
     check(ItemInfo);
     return ItemInfo->StaticMesh;
 }
+
+ERPGItemCategory FRPGItemHelper::GetItemCategory(const FName& InRowName)
+{
+    const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
+    return ItemInfo->ItemCategory;
+}

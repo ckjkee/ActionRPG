@@ -19,8 +19,8 @@ struct FRPGItemSlot
     bool bIsActive;
 };
 
-UCLASS()
-class ACTIONRPG_API URPGInventorySlotWidget : public URPGBaseWidget
+UCLASS(Abstract)
+class ACTIONRPG_API URPGInventorySlotWidget final : public URPGBaseWidget
 {
     GENERATED_BODY()
 public:
@@ -44,7 +44,7 @@ protected:
 
 private:
     FRPGItemSlot ItemSlot;
-
+    UFUNCTION()
     void OnSlotClicked();
     FText MakeValidName(const FText& InName) const;
 };

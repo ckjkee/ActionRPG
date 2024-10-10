@@ -1,6 +1,7 @@
 // Copyright Stanislav Bezrukov. All Rights Reserved.
 
 #include "Components/RPGInventoryComponent.h"
+#include "Utility/RPGItemHelper.h"
 
 FOnInventroyChanged& URPGInventoryComponent::OnInventoryChanged()
 {
@@ -19,14 +20,6 @@ void URPGInventoryComponent::AddItem(const FName& ItemRowName, const uint32 Coun
         Items.Add(ItemRowName, Count);
     }
     OnInventoryChangedEvent.Broadcast();
-
-    UE_LOG(LogTemp, Warning, TEXT("--------------------------"));
-    for(auto item : Items)
-    {
-        UE_LOG(LogTemp, Warning,TEXT("%s = %d"), *item.Key.ToString(), item.Value);
-    }
-
-    UE_LOG(LogTemp, Warning, TEXT("--------------------------"));
 }
 
 bool URPGInventoryComponent::RemoveItem(const FName& ItemRowName, const uint32 Count)
@@ -81,4 +74,17 @@ uint32 URPGInventoryComponent::GetItemCount(const FName& ItemRowName) const
 const TMap<FName, uint32>& URPGInventoryComponent::GetItems() const
 {
     return Items;
+}
+
+const FName URPGInventoryComponent::GetFirstWeapon() const
+{
+    for(const TPair<FName,uint32> Item : Items)
+    {
+        const ERPGItemCategory Category = FRPGItemHelper::GetItemCategory(Item.Key);
+        if(Category == ERPGItemCategory::Weapon)
+        {
+            return Item.Key;
+        }
+    }
+    return FName();
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Bases/RPGBaseComponent.h"
+#include "Interfaces/RPGCurrentWeapon.h"
 #include "RPGStartingItemsComponent.generated.h"
 
 USTRUCT(BlueprintType)
