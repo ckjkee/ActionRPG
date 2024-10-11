@@ -7,7 +7,6 @@
 #include "Interfaces/RPGInventory.h"
 #include "RPGInventoryComponent.generated.h"
 
-
 UCLASS()
 class ACTIONRPG_API URPGInventoryComponent final : public URPGBaseComponent, public IRPGInventory
 {
@@ -21,9 +20,13 @@ public:
     virtual bool HasItem(const FName& ItemRowName) const override;
     virtual uint32 GetItemCount(const FName& ItemRowName) const override;
     virtual const TMap<FName, uint32>& GetItems() const override;
-    virtual const FName GetFirstWeapon() const override; 
+    virtual const FName GetFirstWeapon() const override;
+    virtual FOnAddedItem& OnAddedItem() override;
+    virtual FOnRemovedItem& OnRemovedItem() override;
 
 private:
     FOnInventroyChanged OnInventoryChangedEvent;
+    FOnAddedItem OnAddedItemEvent;
+    FOnRemovedItem OnRemovedItemEvent;
     TMap<FName, uint32> Items;
 };

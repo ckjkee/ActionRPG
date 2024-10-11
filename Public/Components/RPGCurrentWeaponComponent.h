@@ -18,9 +18,12 @@ public:
 	virtual void SetCurrentWeapon(const FName& InWeapon) override;
     virtual const FName& GetCurrentWeapon() const override;
 	virtual FOnCurrentWeaponChanged& OnCurrentWeaponChanged() override;
+	virtual FOnDealDamage& OnDealDamage() override;
+	void DoDamage() const;
 
 private:
 	FOnCurrentWeaponChanged OnCurrentWeaponChangedEvent;
+	FOnDealDamage OnDealDamageEvent;
 	FName CurrenWeapon;
 	IRPGInventory* Inventory;
 

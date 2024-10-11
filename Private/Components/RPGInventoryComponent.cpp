@@ -20,6 +20,7 @@ void URPGInventoryComponent::AddItem(const FName& ItemRowName, const uint32 Coun
         Items.Add(ItemRowName, Count);
     }
     OnInventoryChangedEvent.Broadcast();
+    OnAddedItemEvent.Broadcast(ItemRowName, Count);
 }
 
 bool URPGInventoryComponent::RemoveItem(const FName& ItemRowName, const uint32 Count)
@@ -40,6 +41,7 @@ bool URPGInventoryComponent::RemoveItem(const FName& ItemRowName, const uint32 C
         Items.Remove(ItemRowName);
     }
     OnInventoryChangedEvent.Broadcast();
+    OnRemovedItemEvent.Broadcast(ItemRowName, Count);
     return true;
 }
 
@@ -87,4 +89,14 @@ const FName URPGInventoryComponent::GetFirstWeapon() const
         }
     }
     return FName();
+}
+
+FOnAddedItem& URPGInventoryComponent::OnAddedItem()
+{
+    return OnAddedItemEvent;
+}
+
+FOnRemovedItem& URPGInventoryComponent::OnRemovedItem()
+{
+    return OnRemovedItemEvent;
 }

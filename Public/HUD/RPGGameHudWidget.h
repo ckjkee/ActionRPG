@@ -8,6 +8,9 @@
 
 class URPGInventoryWidget;
 class URPGCurrentWeaponWidget;
+class URPGInventoryMessagesWidget;
+class URPGDamageMessagesWidget;
+
 
 UCLASS(Abstract)
 class ACTIONRPG_API URPGGameHudWidget final : public URPGHudWidget
@@ -21,4 +24,10 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	URPGCurrentWeaponWidget* CurrentWeaponWidget;
+
+	UPROPERTY(meta = (BindWidget))
+	URPGInventoryMessagesWidget* InventoryMessagesWidget;
+
+	UPROPERTY(meta = (BindWidget))
+	URPGDamageMessagesWidget* DamageMessagesWidget;
 };

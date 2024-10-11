@@ -17,4 +17,5 @@ public:
 	static FText GetItemName(const FName& InRowName);
 	static UStaticMesh* GetItemStaticMesh(const FName& InRowName);
 	static ERPGItemCategory GetItemCategory(const FName& InRowName);
+	static float GetItemDamage(const FName& InRowName);
 };

@@ -7,6 +7,7 @@
 #include "RPGCurrentWeapon.generated.h"
 
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnCurrentWeaponChanged, FName& /*NewWeapon*/)
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnDealDamage, const float /*DamageDone*/)
 
     UINTERFACE(MinimalAPI) class URPGCurrentWeapon : public UInterface
 {
@@ -21,4 +22,5 @@ public:
     virtual void SetCurrentWeapon(const FName& InWeapon) = 0;
     virtual const FName& GetCurrentWeapon() const = 0;
     virtual FOnCurrentWeaponChanged& OnCurrentWeaponChanged() = 0;
+    virtual FOnDealDamage& OnDealDamage() = 0;
 };

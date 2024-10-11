@@ -37,3 +37,9 @@ ERPGItemCategory FRPGItemHelper::GetItemCategory(const FName& InRowName)
     const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
     return ItemInfo->ItemCategory;
 }
+
+float FRPGItemHelper::GetItemDamage(const FName& InRowName)
+{
+    const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
+    return ItemInfo->Damage;
+}

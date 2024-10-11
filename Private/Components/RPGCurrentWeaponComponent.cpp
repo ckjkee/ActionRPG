@@ -4,6 +4,7 @@
 #include "Components/RPGCurrentWeaponComponent.h"
 #include "Interfaces/RPGInventory.h"
 #include "Utility/RPGHelperFunctions.h"
+#include "Utility/RPGItemHelper.h"
 
 void URPGCurrentWeaponComponent::BeginPlay()
 {
@@ -26,6 +27,16 @@ const FName& URPGCurrentWeaponComponent::GetCurrentWeapon() const
 FOnCurrentWeaponChanged& URPGCurrentWeaponComponent::OnCurrentWeaponChanged()
 {
 	return OnCurrentWeaponChangedEvent;
+}
+
+FOnDealDamage& URPGCurrentWeaponComponent::OnDealDamage()
+{
+	return OnDealDamageEvent;
+}
+
+void URPGCurrentWeaponComponent::DoDamage() const
+{
+	OnDealDamageEvent.Broadcast(FRPGItemHelper::GetItemDamage(CurrenWeapon));
 }
 
 void URPGCurrentWeaponComponent::UpdateCurrentWeapon()

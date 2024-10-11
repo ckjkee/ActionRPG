@@ -21,9 +21,12 @@ public:
 
     FOnDamageTaken OnDamageTakenEvent;
 
+    FOnHealthReduced OnHealthReducedEvent;
+
     virtual  FOnDead& OnDead() override;
     virtual FOnHealthChanged& OnHealthChanged() override;
     virtual FOnDamageTaken& OnDamageTaken() override;
+    virtual FOnHealthReduced& OnHealthReduced() override;
     virtual void ResetCharacterForResurrect() override;
     bool IsDead() const;
 

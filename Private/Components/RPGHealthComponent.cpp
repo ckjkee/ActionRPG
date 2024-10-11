@@ -89,6 +89,7 @@ float URPGHealthComponent::GetCurrentHealth() const
 void URPGHealthComponent::ReduceHealth(const float Value)
 {
     SetCurrentHealth(CurrentHealth - Value);
+    OnHealthReducedEvent.Broadcast(Value);
     OnHealthChangedEvent.Broadcast(CurrentHealth);
     OnDamageTakenEvent.Broadcast();
     if (DelayBeforeRecoveryTimer.IsValid())
@@ -112,6 +113,11 @@ FOnHealthChanged& URPGHealthComponent::OnHealthChanged()
 FOnDamageTaken& URPGHealthComponent::OnDamageTaken()
 {
     return OnDamageTakenEvent;
+}
+
+FOnHealthReduced& URPGHealthComponent::OnHealthReduced()
+{
+    return OnHealthReducedEvent;
 }
 
 void URPGHealthComponent::ResetCharacterForResurrect()

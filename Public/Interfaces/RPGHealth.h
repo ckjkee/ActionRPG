@@ -9,6 +9,7 @@
 DECLARE_MULTICAST_DELEGATE(FOnDead)
 DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthChanged, float)
 DECLARE_MULTICAST_DELEGATE(FOnDamageTaken)
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnHealthReduced,const float /*DamageTaken*/)
 
     // This class does not need to be modified.
     UINTERFACE(MinimalAPI) class URPGHealth : public UInterface
@@ -28,6 +29,7 @@ public:
     virtual FOnDamageTaken& OnDamageTaken() = 0;
     virtual FOnDead& OnDead() = 0;
     virtual FOnHealthChanged& OnHealthChanged() = 0;
+    virtual FOnHealthReduced& OnHealthReduced() = 0;
     virtual void ResetCharacterForResurrect() = 0;
     virtual float GetMaxHealth() const = 0;
     virtual float GetCurrentHealth() const = 0;
