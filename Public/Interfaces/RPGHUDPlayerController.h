@@ -6,7 +6,7 @@
 #include "UObject/Interface.h"
 #include "RPGHUDPlayerController.generated.h"
 
-DECLARE_MULTICAST_DELEGATE(FOnInventoryWidgetToggled)
+DECLARE_MULTICAST_DELEGATE(FOnWidgetToggled)
 
 UINTERFACE(MinimalAPI)
 class URPGHUDPlayerController : public UInterface
@@ -19,5 +19,6 @@ class ACTIONRPG_API IRPGHUDPlayerController
 	GENERATED_BODY()
 
 public:
-	virtual FOnInventoryWidgetToggled& OnInventoryWidgetToggled() = 0;
+	virtual FOnWidgetToggled& OnInventoryWidgetToggled() = 0;
+	virtual FOnWidgetToggled& OnPauseWidgetToggled() = 0;
 };

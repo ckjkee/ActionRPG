@@ -11,6 +11,7 @@ class URPGCurrentWeaponWidget;
 class URPGInventoryMessagesWidget;
 class URPGDamageMessagesWidget;
 class URPGPlayerInventoryStrategy;
+class URPGPauseWidget;
 
 
 UCLASS(Abstract)
@@ -34,4 +35,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<URPGPlayerInventoryStrategy> PlayerInventoryStrategyClass;
+
+	UPROPERTY(meta = (BindWidget))
+	URPGPauseWidget* PauseWidget;
 };

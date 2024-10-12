@@ -12,16 +12,20 @@ class ACTIONRPG_API ARPGGamePlayerController final : public ARPGPlayerController
 {
     GENERATED_BODY()
 public:
-    virtual FOnInventoryWidgetToggled& OnInventoryWidgetToggled() override;
+    virtual FOnWidgetToggled& OnInventoryWidgetToggled() override;
+    virtual FOnWidgetToggled& OnPauseWidgetToggled() override;
 
 protected:
     virtual void BeginPlay() override;
     virtual void SetupInputComponent() override;
 private:
-    FOnInventoryWidgetToggled OnInventoryWidetToggledEvent;
+    FOnWidgetToggled OnInventoryWidetToggledEvent;
+    FOnWidgetToggled OnPauseWidgetToggledEvent;
 
     bool bIsInventoryShown = false;
+    bool bIsPauseShown = false;
 
     void ToggleInventory();
     void UpdateInputMode();
+    void TogglePauseWidget();
 };

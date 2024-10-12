@@ -13,6 +13,7 @@ void ARPGGamePlayerController::SetupInputComponent()
     Super::SetupInputComponent();
     check(InputComponent);
     InputComponent->BindAction("Inventory", IE_Pressed, this, &ThisClass::ToggleInventory);
+    InputComponent->BindAction("Pause",IE_Pressed,this, &ThisClass::TogglePauseWidget).bExecuteWhenPaused = true;
 }
 
 void ARPGGamePlayerController::ToggleInventory()
@@ -24,7 +25,7 @@ void ARPGGamePlayerController::ToggleInventory()
 
 void ARPGGamePlayerController::UpdateInputMode()
 {
-    bShowMouseCursor = bIsInventoryShown;
+    bShowMouseCursor = bIsInventoryShown || bIsPauseShown;
     if(bIsInventoryShown)
     {
         SetInputMode(FInputModeGameAndUI().SetHideCursorDuringCapture(false));
@@ -35,7 +36,20 @@ void ARPGGamePlayerController::UpdateInputMode()
     }
 }
 
-FOnInventoryWidgetToggled& ARPGGamePlayerController::OnInventoryWidgetToggled()
+void ARPGGamePlayerController::TogglePauseWidget()
+{
+    bIsPauseShown = !bIsPauseShown;
+    SetPause(bIsPauseShown);
+    UpdateInputMode();
+    OnPauseWidgetToggledEvent.Broadcast();
+}
+
+FOnWidgetToggled& ARPGGamePlayerController::OnInventoryWidgetToggled()
 {
     return OnInventoryWidetToggledEvent;
+}
+
+FOnWidgetToggled& ARPGGamePlayerController::OnPauseWidgetToggled()
+{
+    return OnPauseWidgetToggledEvent;
 }

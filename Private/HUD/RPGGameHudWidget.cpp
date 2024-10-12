@@ -10,12 +10,12 @@
 #include "Interfaces/RPGHUDPlayerController.h"
 #include "Interfaces/RPGHealth.h"
 #include "Interfaces/RPGCurrentWeapon.h"
-
+#include "UI/RPGPauseWidget.h"
 
 void URPGGameHudWidget::NativeConstruct()
 {
     Super::NativeConstruct();
-    if(!GetOwningPlayerPawn())
+    if (!GetOwningPlayerPawn())
     {
         Hide();
         return;
@@ -23,7 +23,7 @@ void URPGGameHudWidget::NativeConstruct()
     check(PlayerInventoryWidget);
     IRPGInventory* Inventory = RPGHelperFunctions::GetComponentByInterface<IRPGInventory>(GetOwningPlayerPawn());
     check(Inventory);
-    URPGPlayerInventoryStrategy* PlayerInventoryStrategy = NewObject<URPGPlayerInventoryStrategy>(this,PlayerInventoryStrategyClass);
+    URPGPlayerInventoryStrategy* PlayerInventoryStrategy = NewObject<URPGPlayerInventoryStrategy>(this, PlayerInventoryStrategyClass);
     check(PlayerInventoryStrategy);
     PlayerInventoryWidget->SetInventory(Inventory);
     PlayerInventoryWidget->SetStrategy(PlayerInventoryStrategy);
@@ -40,8 +40,11 @@ void URPGGameHudWidget::NativeConstruct()
     DamageMessagesWidget->SetPlayerHealthComponent(Health);
     DamageMessagesWidget->SetPlayerCurrentWeaponComponent(CurrentWeapon);
 
-
     IRPGHUDPlayerController* HUDController = Cast<IRPGHUDPlayerController>(GetOwningPlayer());
     check(HUDController);
+    check(PauseWidget);
     HUDController->OnInventoryWidgetToggled().AddUObject(PlayerInventoryWidget, &ThisClass::Toggle);
+    HUDController->OnPauseWidgetToggled().AddUObject(PauseWidget, &ThisClass::Toggle);
+
+    PauseWidget->Hide();
 }
