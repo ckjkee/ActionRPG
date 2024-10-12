@@ -4,9 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "UI/RPGBaseWidget.h"
+#include "Components/Button.h"
 #include "RPGButtonWidget.generated.h"
 
-class UButton;
 class UTextBlock;
 class FOnButtonClickedEvent;
 

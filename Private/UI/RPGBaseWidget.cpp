@@ -1,6 +1,8 @@
 // Copyright Stanislav Bezrukov. All Rights Reserved.
 
 #include "UI/RPGBaseWidget.h"
+#include "Kismet/GameplayStatics.h"
+#include "Interfaces/RPGGameState.h"
 
 void URPGBaseWidget::Show()
 {
@@ -33,6 +35,11 @@ void URPGBaseWidget::Hide()
 void URPGBaseWidget::Toggle()
 {
     IsVisible() ? Hide() : Show();
+}
+
+IRPGGameState* URPGBaseWidget::GetGameState() const
+{
+    return Cast<IRPGGameState>(UGameplayStatics::GetGameInstance(this));
 }
 
 void URPGBaseWidget::Update()

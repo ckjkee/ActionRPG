@@ -2,7 +2,6 @@
 
 
 #include "UI/RPGButtonWidget.h"
-#include "Components/Button.h"
 #include "Components/TextBlock.h"
 
 FOnButtonClickedEvent& URPGButtonWidget::OnButtonClicked() const

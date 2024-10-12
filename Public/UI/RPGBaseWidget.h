@@ -6,6 +6,8 @@
 #include "Blueprint/UserWidget.h"
 #include "RPGBaseWidget.generated.h"
 
+class IRPGGameState;
+
 UCLASS(Abstract)
 class ACTIONRPG_API URPGBaseWidget : public UUserWidget
 {
@@ -14,6 +16,7 @@ public:
     void Show();
     void Hide();
     void Toggle();
+    IRPGGameState* GetGameState() const;
 
 protected:
     UPROPERTY(Transient, meta = (BindWidgetAnimOptional))

@@ -5,6 +5,7 @@
 #include "UI/RPGInventoryWidget.h"
 #include "UI/RPGInventoryMessagesWidget.h"
 #include "UI/RPGDamageMessagesWidget.h"
+#include "UI/Strategies/RPGPlayerInventoryStrategy.h"
 #include "Interfaces/RPGInventory.h"
 #include "Interfaces/RPGHUDPlayerController.h"
 #include "Interfaces/RPGHealth.h"
@@ -19,11 +20,14 @@ void URPGGameHudWidget::NativeConstruct()
         Hide();
         return;
     }
-    check(InventoryWidget);
+    check(PlayerInventoryWidget);
     IRPGInventory* Inventory = RPGHelperFunctions::GetComponentByInterface<IRPGInventory>(GetOwningPlayerPawn());
     check(Inventory);
-    InventoryWidget->SetInventory(Inventory);
-    InventoryWidget->Hide();
+    URPGPlayerInventoryStrategy* PlayerInventoryStrategy = NewObject<URPGPlayerInventoryStrategy>(this,PlayerInventoryStrategyClass);
+    check(PlayerInventoryStrategy);
+    PlayerInventoryWidget->SetInventory(Inventory);
+    PlayerInventoryWidget->SetStrategy(PlayerInventoryStrategy);
+    PlayerInventoryWidget->Hide();
 
     check(InventoryMessagesWidget);
     InventoryMessagesWidget->SetInventory(Inventory);
@@ -39,5 +43,5 @@ void URPGGameHudWidget::NativeConstruct()
 
     IRPGHUDPlayerController* HUDController = Cast<IRPGHUDPlayerController>(GetOwningPlayer());
     check(HUDController);
-    HUDController->OnInventoryWidgetToggled().AddUObject(InventoryWidget, &ThisClass::Toggle);
+    HUDController->OnInventoryWidgetToggled().AddUObject(PlayerInventoryWidget, &ThisClass::Toggle);
 }

@@ -10,6 +10,7 @@ class URPGInventoryWidget;
 class URPGCurrentWeaponWidget;
 class URPGInventoryMessagesWidget;
 class URPGDamageMessagesWidget;
+class URPGPlayerInventoryStrategy;
 
 
 UCLASS(Abstract)
@@ -20,7 +21,7 @@ protected:
 	virtual void NativeConstruct() override;
 
 	UPROPERTY(meta = (BindWidget))
-	URPGInventoryWidget* InventoryWidget;
+	URPGInventoryWidget* PlayerInventoryWidget;
 
 	UPROPERTY(meta = (BindWidget))
 	URPGCurrentWeaponWidget* CurrentWeaponWidget;
@@ -30,4 +31,7 @@ protected:
 
 	UPROPERTY(meta = (BindWidget))
 	URPGDamageMessagesWidget* DamageMessagesWidget;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<URPGPlayerInventoryStrategy> PlayerInventoryStrategyClass;
 };

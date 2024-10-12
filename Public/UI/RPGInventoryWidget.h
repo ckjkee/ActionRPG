@@ -9,6 +9,7 @@
 class UPanelWidget;
 class URPGInventorySlotWidget;
 class IRPGInventory;
+class URPGInventoryStrategy;
 
 UCLASS(Abstract)
 class ACTIONRPG_API URPGInventoryWidget final : public URPGBaseWidget
@@ -16,10 +17,10 @@ class ACTIONRPG_API URPGInventoryWidget final : public URPGBaseWidget
 	GENERATED_BODY()
 public:
 	void SetInventory(IRPGInventory* OtherInventory);
+	void SetStrategy(URPGInventoryStrategy* InStrategy);
 protected:
     UPROPERTY(meta = (BindWidget))
 	UPanelWidget* PanelWidget;
-
 	virtual void Update() override;
 private:
     UPROPERTY(EditDefaultsOnly, Category = "Settings")
@@ -30,4 +31,5 @@ private:
 	bool IsEquiped(const FName& RowName);
 
 	IRPGInventory* InventoryComponent;
+	URPGInventoryStrategy* Strategy;
 };
