@@ -6,6 +6,10 @@
 #include "UObject/Interface.h"
 #include "RPGGameState.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnLoadingStarted)
+DECLARE_MULTICAST_DELEGATE(FOnLoadingEnded)
+
+
 UINTERFACE(MinimalAPI)
 class URPGGameState : public UInterface
 {
@@ -20,4 +24,7 @@ class ACTIONRPG_API IRPGGameState
 public:
 	virtual void NewGame() = 0;
 	virtual void QuitGame() const = 0;
+	virtual void LevelLoaded() = 0;
+	virtual FOnLoadingStarted& OnLoadingStarted() = 0;
+	virtual FOnLoadingEnded& OnLoadingEnded() = 0;
 };
