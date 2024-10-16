@@ -25,6 +25,7 @@ public:
 	virtual void NewGame() = 0;
 	virtual void QuitGame() const = 0;
 	virtual void LevelLoaded() = 0;
+	virtual void ReturnToMainMenu() = 0;
 	virtual FOnLoadingStarted& OnLoadingStarted() = 0;
 	virtual FOnLoadingEnded& OnLoadingEnded() = 0;
 };

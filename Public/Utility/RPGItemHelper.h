@@ -18,4 +18,6 @@ public:
 	static UStaticMesh* GetItemStaticMesh(const FName& InRowName);
 	static ERPGItemCategory GetItemCategory(const FName& InRowName);
 	static float GetItemDamage(const FName& InRowName);
+	static USkeletalMesh* GetItemSkeletalMesh(const FName& InRowName);
+	static TSubclassOf<UAnimInstance> GetItemAnimInstance(const FName& InRowName);
 };

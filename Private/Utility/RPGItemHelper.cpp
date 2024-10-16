@@ -43,3 +43,15 @@ float FRPGItemHelper::GetItemDamage(const FName& InRowName)
     const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
     return ItemInfo->Damage;
 }
+
+USkeletalMesh* FRPGItemHelper::GetItemSkeletalMesh(const FName& InRowName)
+{
+    const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
+    return ItemInfo->SkeletalMesh;
+}
+
+TSubclassOf<UAnimInstance> FRPGItemHelper::GetItemAnimInstance(const FName& InRowName)
+{
+    const FRPGItemInfo* ItemInfo = GetItemInfo(InRowName);
+    return ItemInfo->AnimInstanceClass;
+}

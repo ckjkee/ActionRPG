@@ -15,6 +15,7 @@ public:
     virtual void NewGame() override;
     virtual void QuitGame() const override;
     virtual void LevelLoaded() override;
+    virtual void ReturnToMainMenu() override;
     virtual FOnLoadingStarted& OnLoadingStarted() override;
     virtual FOnLoadingEnded& OnLoadingEnded() override;
 
@@ -22,9 +23,12 @@ private:
     UPROPERTY(EditDefaultsOnly, Category = "Settings")
     TSoftObjectPtr<UWorld> GameLevel;
 
+    UPROPERTY(EditDefaultsOnly, Category = "Settings")
+    TSoftObjectPtr<UWorld> MainMenuLevel;
+
     TSoftObjectPtr<UWorld> Level;
 
-    void StartLoadingLevel( TSoftObjectPtr<UWorld>& InLevel);
+    void StartLoadingLevel(TSoftObjectPtr<UWorld>& InLevel);
     void OpenLevel() const;
 
     float DelayBeforeLoading = 0.5f;

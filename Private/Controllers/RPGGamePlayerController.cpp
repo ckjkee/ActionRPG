@@ -53,3 +53,8 @@ FOnWidgetToggled& ARPGGamePlayerController::OnPauseWidgetToggled()
 {
     return OnPauseWidgetToggledEvent;
 }
+
+void ARPGGamePlayerController::ContinueGame()
+{
+    TogglePauseWidget();
+}

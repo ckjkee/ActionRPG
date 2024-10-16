@@ -21,4 +21,5 @@ class ACTIONRPG_API IRPGHUDPlayerController
 public:
 	virtual FOnWidgetToggled& OnInventoryWidgetToggled() = 0;
 	virtual FOnWidgetToggled& OnPauseWidgetToggled() = 0;
+	virtual void ContinueGame() = 0;
 };

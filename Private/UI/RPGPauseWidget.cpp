@@ -3,6 +3,8 @@
 
 #include "UI/RPGPauseWidget.h"
 #include "UI/RPGButtonWidget.h"
+#include "Interfaces/RPGGameState.h"
+#include "Interfaces/RPGHUDPlayerController.h"
 
 void URPGPauseWidget::NativeConstruct()
 {
@@ -18,15 +20,19 @@ void URPGPauseWidget::NativeConstruct()
 
 void URPGPauseWidget::OnContinueButtonClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnContinueButtonClicked"));
+	IRPGHUDPlayerController* HUDPlayerController = Cast<IRPGHUDPlayerController>(GetOwningPlayer());
+	check(HUDPlayerController);
+	HUDPlayerController->ContinueGame();
 }
 
 void URPGPauseWidget::OnReturnToMainMenuButtonClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnReturnToMainMenuButtonClicked"));
+	check(GetGameState());
+	GetGameState()->ReturnToMainMenu();
 }
 
 void URPGPauseWidget::OnQuitGameButtonClicked()
 {
-	UE_LOG(LogTemp, Warning, TEXT("OnQuitGameButtonClicked"));
+	check(GetGameState());
+	GetGameState()->QuitGame();
 }

@@ -9,10 +9,17 @@ void URPGGameInstance::NewGame()
     StartLoadingLevel(GameLevel);
 }
 
+void URPGGameInstance::ReturnToMainMenu()
+{
+    StartLoadingLevel(MainMenuLevel);
+}
+
 void URPGGameInstance::StartLoadingLevel(TSoftObjectPtr<UWorld>& InLevel)
 {
     Level = InLevel;
     OnLoadingStartedEvent.Broadcast();
+
+    UGameplayStatics::SetGamePaused(this, false);
 
     FTimerHandle TimerHandle;
     GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ThisClass::OpenLevel, DelayBeforeLoading);

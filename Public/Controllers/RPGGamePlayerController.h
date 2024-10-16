@@ -14,6 +14,7 @@ class ACTIONRPG_API ARPGGamePlayerController final : public ARPGPlayerController
 public:
     virtual FOnWidgetToggled& OnInventoryWidgetToggled() override;
     virtual FOnWidgetToggled& OnPauseWidgetToggled() override;
+    virtual void ContinueGame() override;
 
 protected:
     virtual void BeginPlay() override;
